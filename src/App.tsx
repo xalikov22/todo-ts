@@ -1,24 +1,23 @@
 import './App.css'
-import useCount from './hooks/useCount'
 import {useState} from 'react'
-import useTodo, {TodoItem} from './hooks/useTodo'
+import useTodo, {TodoItemType} from './hooks/useTodo'
+import TodoItem from './components/TodoItem'
+import {uuid} from './util'
 
 function App() {
-  const [state, dispatch] = useCount()
+
   const [todoState, todoDispatch] = useTodo()
   const [itemText, setItemText] = useState('')
   const [itemTitle, setItemTitle] = useState('')
-  const {count} = state
+
   const {items} = todoState
-  const increase = () => {
-    // @ts-ignore
-    dispatch({type: 'increase'})
-  }
+
   const onClick = () => {
     // @ts-ignore
     todoDispatch({
       type: 'add',
       payload: {
+        id: uuid(),
         title: itemTitle,
         task: itemText
       }
@@ -28,14 +27,16 @@ function App() {
   }
   return (
     <div className="App">
-      <div className="card">
-        <button onClick={increase}>
-          count is {count}
-        </button>
-      </div>
       <div>
         <ul>
-          {items?.map((item: TodoItem, index: number) => <li key={index}>{item.title}</li>)}
+          {items?.map((item: TodoItemType) =>
+            <li key={item.id}>
+              <TodoItem
+                id={item.id}
+                task={item.task}
+                title={item.title}
+              />
+            </li>)}
         </ul>
       </div>
       <div>
@@ -56,7 +57,10 @@ function App() {
           />
         </div>
         <div>
-          <button onClick={onClick} disabled={!(itemTitle.length > 0 && itemText.length > 0)}>Add Todo Item</button>
+          <button
+            onClick={onClick}
+            disabled={!(itemTitle.length > 0 && itemText.length > 0)}
+          >Add Todo Item</button>
         </div>
       </div>
     </div>
