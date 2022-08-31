@@ -4,17 +4,18 @@ const initialState: TodoState = {
   items: []
 }
 
-export interface TodoItem {
+export interface TodoItemType {
+  id: string
   title: string
   task: string
 }
 
 interface TodoState {
-  items: TodoItem[]
+  items: TodoItemType[]
 }
 
 type TodoAction =
-  | { type: 'add', payload: TodoItem }
+  | { type: 'add', payload: TodoItemType }
 
 function loginReducer(state: TodoState, action: TodoAction) {
   switch (action.type) {
