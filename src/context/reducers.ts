@@ -10,14 +10,16 @@ type ActionMap<M extends { [index: string]: any }> = {
 }
 
 export enum Types {
-  Create = "CREATE_TODO",
-  Delete = "DELETE_TODO",
+  Create = 'CREATE_TODO',
+  Finish = 'FINISH_TODO',
+  Delete = 'DELETE_TODO',
 }
 
-type TodoType = {
+export type TodoType = {
   id: string
   title: string
   task: string
+  state: 'todo' | 'doing' | 'finished'
   color: { red: number, green: number, blue: number }
 }
 
@@ -26,7 +28,11 @@ type TodoPayload = {
     id: string
     title: string
     task: string
+    state: 'todo' | 'doing' | 'finished'
     color: { red: number, green: number, blue: number }
+  }
+  [Types.Finish]: {
+    id: string
   }
   [Types.Delete]: {
     id: string
@@ -49,9 +55,25 @@ export const todoReducer = (
           id: action.payload.id,
           title: action.payload.title,
           task: action.payload.task,
+          state: action.payload.state,
           color: action.payload.color
         }
       ]
+    case Types.Finish:
+      return [...state.map(todo => {
+        let currentState = todo.state
+        if (todo.id === action.payload.id) {
+          if (todo.state === 'finished') {
+            currentState = 'todo'
+          } else {
+            currentState = 'finished'
+          }
+        }
+        return {
+          ...todo,
+          state: currentState
+        }
+      })]
     case Types.Delete:
       return [...state.filter(todo => todo.id !== action.payload.id)]
     default:

@@ -1,5 +1,5 @@
-import {TodoContext, TodoType} from '../context/TodoContext'
-import {Types} from '../context/reducers'
+import {TodoContext} from '../context/TodoContext'
+import {Types, TodoType} from '../context/reducers'
 import TodoItem from './TodoItem'
 import {useContext, useState} from 'react'
 import {uuid} from '../util'
@@ -24,6 +24,7 @@ function TodoList() {
         id: uuid(),
         title: itemTitle,
         task: itemText,
+        state: 'todo',
         color: color
       }
     })
@@ -65,6 +66,7 @@ function TodoList() {
                 id={item.id}
                 task={item.task}
                 title={item.title}
+                state={item.state}
                 color={item.color}
               />
             </li>)}
