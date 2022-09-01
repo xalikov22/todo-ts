@@ -1,12 +1,5 @@
 import React, {createContext, useReducer, Dispatch} from 'react'
-import {todoReducer, TodoActions} from './reducers'
-
-export type TodoType = {
-  id: string
-  title: string
-  task: string
-  color: { red: number, green: number, blue: number }
-}
+import {todoReducer, TodoType, TodoActions} from './reducers'
 
 type InitialStateType = {
   todos: TodoType[]
