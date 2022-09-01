@@ -5,6 +5,7 @@ export type TodoType = {
   id: string
   title: string
   task: string
+  color: { red: number, green: number, blue: number }
 }
 
 type InitialStateType = {

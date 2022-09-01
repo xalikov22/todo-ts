@@ -12,13 +12,19 @@ function TodoList() {
   const [itemTitle, setItemTitle] = useState('')
 
   const onClick = () => {
+    const color = {
+      red: Math.random() * 100 + 150,
+      green: Math.random() * 100 + 150,
+      blue: Math.random() * 100 + 150,
+    }
     // @ts-ignore
     dispatch({
       type: Types.Create,
       payload: {
         id: uuid(),
         title: itemTitle,
-        task: itemText
+        task: itemText,
+        color: color
       }
     })
     setItemTitle('')
@@ -59,6 +65,7 @@ function TodoList() {
                 id={item.id}
                 task={item.task}
                 title={item.title}
+                color={item.color}
               />
             </li>)}
         </ul>

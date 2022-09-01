@@ -18,6 +18,7 @@ type TodoType = {
   id: string
   title: string
   task: string
+  color: { red: number, green: number, blue: number }
 }
 
 type TodoPayload = {
@@ -25,6 +26,7 @@ type TodoPayload = {
     id: string
     title: string
     task: string
+    color: { red: number, green: number, blue: number }
   }
   [Types.Delete]: {
     id: string
@@ -46,7 +48,8 @@ export const todoReducer = (
         {
           id: action.payload.id,
           title: action.payload.title,
-          task: action.payload.task
+          task: action.payload.task,
+          color: action.payload.color
         }
       ]
     case Types.Delete:
