@@ -34,6 +34,13 @@ function TodoItem({id, title, task, state, color}: TodoType) {
     }
   }
 
+  const showDetailsText = () => {
+    if (showDetails) {
+      return 'Hide Details'
+    }
+    return 'Show Details'
+  }
+
   return (
     <div
       className={'TodoItem'}
@@ -49,7 +56,7 @@ function TodoItem({id, title, task, state, color}: TodoType) {
         <button
           className={'btnCircle btnBackgroundColor btnColor'}
           onClick={onClickDetails}
-          title={'Collapse'}
+          title={showDetailsText()}
         >
           {/*<img src={DeleteIcon} alt={'Delete'} title={'Delete'}/>*/}
         </button>
@@ -63,6 +70,7 @@ function TodoItem({id, title, task, state, color}: TodoType) {
         <button
           className={'btnCircle btnBackgroundColor btnColor'}
           onClick={onClickDelete}
+          title={'Remove Task'}
         >
           {/*<img src={DeleteIcon} alt={'Delete'} title={'Delete'}/>*/}
         </button>
