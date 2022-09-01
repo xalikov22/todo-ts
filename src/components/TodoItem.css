@@ -19,6 +19,15 @@
     padding: 1rem;
     font-size: 110%;
     text-decoration-thickness: 4px;
+    opacity: 80%;
+}
+
+.italic {
+    font-style: italic;
+}
+
+.toBackground {
+    opacity: 50%!important;
 }
 
 .strikeout {

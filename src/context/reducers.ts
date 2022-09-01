@@ -63,10 +63,16 @@ export const todoReducer = (
       return [...state.map(todo => {
         let currentState = todo.state
         if (todo.id === action.payload.id) {
-          if (todo.state === 'finished') {
-            currentState = 'todo'
-          } else {
-            currentState = 'finished'
+          switch (todo.state) {
+            case 'todo':
+              currentState = 'doing'
+              break
+            case 'doing':
+              currentState = 'finished'
+              break
+            case 'finished':
+              currentState = 'todo'
+              break
           }
         }
         return {
