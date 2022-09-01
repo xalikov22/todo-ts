@@ -16,7 +16,7 @@
     line-height: 2rem;
     font-weight: bolder;
     align-self: start;
-    padding: 1rem;
+    padding: 0 1rem;
     font-size: 110%;
     text-decoration-thickness: 4px;
     opacity: 80%;
@@ -52,6 +52,12 @@
     padding: 1rem;
 }
 
+.buttons {
+    position: absolute;
+    right: .8rem;
+    top: .8rem;
+}
+
 .TodoItem .buttons {
     align-self: end;
     display: flex;
@@ -65,8 +71,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 2rem;
-    height: 2rem;
+    width: 1rem;
+    height: 1rem;
     outline:none;
     border: none;
     opacity: 50%;
