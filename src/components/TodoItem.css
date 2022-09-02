@@ -24,7 +24,6 @@
 
 .italic {
     font-style: italic;
-    color: white;
 }
 
 .toBackground {
@@ -51,6 +50,7 @@
 .TodoItem .task {
     align-self: start;
     padding: 1rem;
+    white-space: pre-wrap;
 }
 
 .buttons {
