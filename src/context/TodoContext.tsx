@@ -29,7 +29,20 @@ type ProviderProps = {
 }
 
 const TodoProvider = ({ children }: ProviderProps) => {
-  const [state, dispatch] = useReducer(mainReducer, initialState)
+
+  const localTodos = localStorage.getItem('todoApp')
+
+  let todos: InitialStateType = initialState
+
+  if (localTodos) {
+    if (localTodos.length > 2) {
+      todos = {
+        todos: JSON.parse(localTodos)
+      }
+    }
+  }
+
+  const [state, dispatch] = useReducer(mainReducer, todos)
 
   return (
     <TodoContext.Provider value={{ state, dispatch }}>

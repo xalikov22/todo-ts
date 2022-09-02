@@ -1,21 +1,25 @@
+import {useContext, useEffect, useState} from 'react'
 import {TodoContext} from '../context/TodoContext'
 import {Types, TodoType} from '../context/reducers'
 import TodoItem from './TodoItem'
-import {useContext, useState} from 'react'
 import {uuid} from '../util'
 
 function TodoList() {
 
   const {state, dispatch} = useContext(TodoContext)
 
+  useEffect(() => {
+    localStorage.setItem('todoApp', JSON.stringify(state.todos))
+  }, [state])
+
   const [itemText, setItemText] = useState('')
   const [itemTitle, setItemTitle] = useState('')
 
   const onClick = () => {
     const color = {
-      red: Math.random() * 100 + 150,
-      green: Math.random() * 100 + 150,
-      blue: Math.random() * 100 + 150,
+      red: Math.floor(Math.random() * 100 + 150),
+      green: Math.floor(Math.random() * 100 + 150),
+      blue: Math.floor(Math.random() * 100 + 150)
     }
     // @ts-ignore
     dispatch({
