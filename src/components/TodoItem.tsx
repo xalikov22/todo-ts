@@ -60,6 +60,7 @@ function TodoItem({id, title, task, state, color}: TodoType) {
     >
       <div
         contentEditable={true}
+        suppressContentEditableWarning={true}
         onBlur={editTitle}
         spellCheck={false}
         className={`title ${
@@ -70,6 +71,7 @@ function TodoItem({id, title, task, state, color}: TodoType) {
       {showDetails &&
         <div
           contentEditable={true}
+          suppressContentEditableWarning={true}
           onBlur={editTask}
           spellCheck={false}
           className={'task'}
