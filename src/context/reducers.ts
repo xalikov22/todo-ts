@@ -11,6 +11,7 @@ type ActionMap<M extends { [index: string]: any }> = {
 
 export enum Types {
   Create = 'CREATE_TODO',
+  Update = 'UPDATE_TODO',
   Finish = 'FINISH_TODO',
   Delete = 'DELETE_TODO',
 }
@@ -37,6 +38,13 @@ type TodoPayload = {
   [Types.Delete]: {
     id: string
   }
+  [Types.Update]: {
+    id: string
+    title: string
+    task: string
+    state: 'todo' | 'doing' | 'finished'
+    color: { red: number, green: number, blue: number }
+  }
 }
 
 export type TodoActions = ActionMap<TodoPayload>[keyof ActionMap<
@@ -59,6 +67,13 @@ export const todoReducer = (
           color: action.payload.color
         }
       ]
+    case Types.Update:
+      const s = [...state]
+      const index = s.findIndex(item => item.id === action.payload.id)
+      // s[index].title = [...action.payload.title].reverse().join('')
+      s[index].title = action.payload.title
+      s[index].task = action.payload.task
+      return [...s]
     case Types.Finish:
       return [...state.map(todo => {
         let currentState = todo.state

@@ -6,11 +6,11 @@ import {uuid} from '../util'
 
 function TodoList() {
 
-  const {state, dispatch} = useContext(TodoContext)
+  const {todosState, todosDispatch} = useContext(TodoContext)
 
   useEffect(() => {
-    localStorage.setItem('todoApp', JSON.stringify(state.todos))
-  }, [state])
+    localStorage.setItem('todoApp', JSON.stringify(todosState.todos))
+  }, [todosState])
 
   const [itemText, setItemText] = useState('')
   const [itemTitle, setItemTitle] = useState('')
@@ -22,7 +22,7 @@ function TodoList() {
       blue: Math.floor(Math.random() * 100 + 150)
     }
     // @ts-ignore
-    dispatch({
+    todosDispatch({
       type: Types.Create,
       payload: {
         id: uuid(),
@@ -64,7 +64,7 @@ function TodoList() {
       </div>
       <div>
         <ul>
-          {state.todos?.map((item: TodoType) =>
+          {todosState.todos?.map((item: TodoType) =>
             <li key={item.id}>
               <TodoItem
                 id={item.id}

@@ -5,18 +5,18 @@ import {Types, TodoType} from '../context/reducers'
 
 function TodoItem({id, title, task, state, color}: TodoType) {
 
-  const {dispatch} = useContext(TodoContext)
+  const {todosDispatch} = useContext(TodoContext)
 
   const [showDetails, setShowDetails] = useState(false)
 
   const onClickDelete = (): void => {
     if (confirm(`Delete todo item "${title}"?`)) {
-      dispatch({type: Types.Delete, payload: {id}})
+      todosDispatch({type: Types.Delete, payload: {id}})
     }
   }
 
   const onClickFinish = (): void => {
-    dispatch({type: Types.Finish, payload: {id}})
+    todosDispatch({type: Types.Finish, payload: {id}})
   }
 
   const onClickDetails = (): void => {
@@ -41,17 +41,39 @@ function TodoItem({id, title, task, state, color}: TodoType) {
     return 'Show Details'
   }
 
+  const editTitle = (e:any) => {
+    todosDispatch({type: Types.Update, payload: {
+      id, title: e.currentTarget.textContent, task, state, color
+    }})
+  }
+
+  const editTask = (e:any) => {
+    todosDispatch({type: Types.Update, payload: {
+        id, title, task: e.currentTarget.textContent, state, color
+      }})
+  }
+
   return (
     <div
       className={'TodoItem'}
       style={{backgroundColor: `rgb(${color.red},${color.green},${color.blue}`}}
     >
-      <div className={`title ${
+      <div
+        contentEditable={true}
+        onBlur={editTitle}
+        spellCheck={false}
+        className={`title ${
         state === 'finished' && 'strikeout toBackground'
       } ${
         state === 'doing' && 'italic'
       }`}>{title}</div>
-      {showDetails && <div className={'task'}>{task}</div>}
+      {showDetails &&
+        <div
+          contentEditable={true}
+          onBlur={editTask}
+          spellCheck={false}
+          className={'task'}
+        >{task}</div>}
       <div className={'buttons'}>
         <button
           className={'btnCircle btnBackgroundColor btnColor'}

@@ -10,11 +10,11 @@ const initialState = {
 }
 
 const TodoContext = createContext<{
-  state: InitialStateType
-  dispatch: Dispatch<TodoActions>
+  todosState: InitialStateType
+  todosDispatch: Dispatch<TodoActions>
 }>({
-  state: initialState,
-  dispatch: () => null
+  todosState: initialState,
+  todosDispatch: () => null
 })
 
 const mainReducer = (
@@ -42,10 +42,10 @@ const TodoProvider = ({ children }: ProviderProps) => {
     }
   }
 
-  const [state, dispatch] = useReducer(mainReducer, todos)
+  const [todosState, todosDispatch] = useReducer(mainReducer, todos)
 
   return (
-    <TodoContext.Provider value={{ state, dispatch }}>
+    <TodoContext.Provider value={{ todosState, todosDispatch }}>
       {children}
     </TodoContext.Provider>
   )
