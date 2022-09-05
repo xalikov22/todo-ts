@@ -63,18 +63,16 @@ function TodoList() {
         </div>
       </div>
       <div>
-        <ul>
-          {todosState.todos?.map((item: TodoType) =>
-            <li key={item.id}>
-              <TodoItem
-                id={item.id}
-                task={item.task}
-                title={item.title}
-                state={item.state}
-                color={item.color}
-              />
-            </li>)}
-        </ul>
+        {todosState.todos?.map((item: TodoType) =>
+          <div key={item.id}>
+            <TodoItem
+              id={item.id}
+              task={item.task}
+              title={item.title}
+              state={item.state}
+              color={item.color}
+            />
+          </div>)}
       </div>
     </div>
   )
