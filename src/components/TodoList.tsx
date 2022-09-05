@@ -53,6 +53,9 @@ function TodoList() {
 
   const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault()
+    if (todosState.todos.length < 2) {
+      return
+    }
     const targetId = Number(event.currentTarget.id.split('_')[1])
     const sourceId = Number(event.dataTransfer.getData('text').split('_')[1])
     todosDispatch({
@@ -96,7 +99,7 @@ function TodoList() {
             onDrop={handleDrop}
           >
             <div
-              draggable={true}
+              draggable={todosState.todos.length > 1}
               onDragStart={handleDragStart}
               id={`child_${index}`}
             >
@@ -110,6 +113,7 @@ function TodoList() {
             </div>
           </div>)}
       </div>
+      <input type={'text'}/>
     </div>
   )
 }
