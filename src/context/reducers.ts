@@ -14,6 +14,7 @@ export enum Types {
   Update = 'UPDATE_TODO',
   Finish = 'FINISH_TODO',
   Delete = 'DELETE_TODO',
+  Relist = 'RELIST_TODO'
 }
 
 export type TodoType = {
@@ -45,6 +46,7 @@ type TodoPayload = {
     state: 'todo' | 'doing' | 'finished'
     color: { red: number, green: number, blue: number }
   }
+  [Types.Relist]: TodoType[]
 }
 
 export type TodoActions = ActionMap<TodoPayload>[keyof ActionMap<
@@ -97,6 +99,8 @@ export const todoReducer = (
       })]
     case Types.Delete:
       return [...state.filter(todo => todo.id !== action.payload.id)]
+    case Types.Relist:
+      return [...action.payload]
     default:
       return state
   }
