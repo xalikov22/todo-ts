@@ -77,8 +77,8 @@ function TodoList() {
         </div>
         <div className={'todoInput'}>
           <h4>TASK</h4>
-          <input
-            type={'text'}
+          <textarea
+            // type={'text'}
             onChange={e => setItemText(e.currentTarget.value)}
             value={itemText}
           />
