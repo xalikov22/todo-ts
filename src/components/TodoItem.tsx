@@ -101,16 +101,19 @@ function TodoItem({id, title, task, state, color}: TodoType) {
            if (event.key === 'Tab') {
              event.preventDefault()
              document.execCommand('insertText', false, '\t');
-             taskRef.current = {
-               id, title, task: event.currentTarget.innerText, state, color
-             }
            }
            if (event.key === 'Enter') {
              event.preventDefault()
              document.execCommand('insertText', false, '\n');
-             taskRef.current = {
-               id, title, task: event.currentTarget.innerText, state, color
-             }
+           }
+           taskRef.current = {
+             id, title, task: event.currentTarget.innerText, state, color
+           }
+         }}
+         onKeyUp={(event) => {
+           // console.log('keyup')
+           taskRef.current = {
+             id, title, task: event.currentTarget.innerText, state, color
            }
          }}
           className={'task'}
