@@ -78,16 +78,30 @@ function TodoItem({id, title, task, state, color}: TodoType) {
         state === 'finished' && 'strikeout toBackground'
       } ${
         state === 'doing' && 'italic'
-      }`}>{title}</div>
+      }`}
+        style={{whiteSpace: 'pre-wrap'}}
+      >{title}</div>
       {showDetails &&
-        <div
+       <div
+         style={{whiteSpace: 'pre-wrap'}}
+         onKeyDown={(event) => {
+           if (event.key === 'Enter') {
+             event.preventDefault()
+             document.execCommand('insertText', false, '\n');
+             console.log('keydown', event.currentTarget.innerText)
+             // task: event.nativeEvent.explicitOriginalTarget.innerText,
+             todosDispatch({type: Types.Update, payload: {
+                 id, title, task: event.currentTarget.innerText, state, color
+               }})
+           }
+         }}
           contentEditable={editable}
           suppressContentEditableWarning={true}
           onBlur={editTask}
           onClick={handleOnFocus}
           spellCheck={false}
           className={'task'}
-        >{task}</div>}
+      >{task}</div>}
       <div className={'buttons'}>
         <button
           className={'btnCircle btnBackgroundColor btnColor'}
