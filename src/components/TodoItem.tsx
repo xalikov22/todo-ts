@@ -8,7 +8,6 @@ function TodoItem({id, title, task, state, color}: TodoType) {
   const {todosDispatch} = useContext(TodoContext)
 
   const [showDetails, setShowDetails] = useState(false)
-  const [editable, setEditable] = useState(false)
 
   const onClickDelete = (): void => {
     if (confirm(`Delete todo item "${title}"?`)) {
@@ -46,14 +45,16 @@ function TodoItem({id, title, task, state, color}: TodoType) {
     todosDispatch({type: Types.Update, payload: {
       id, title: e.currentTarget.textContent, task, state, color
     }})
-    setEditable(false)
   }
 
   const editTask = (e:any) => {
     todosDispatch({type: Types.Update, payload: {
         id, title, task: e.currentTarget.textContent, state, color
       }})
-    setEditable(false)
+  }
+
+  const handleOnFocus = (e: any) => {
+    e.contentEditable = true
   }
 
   return (
@@ -63,10 +64,10 @@ function TodoItem({id, title, task, state, color}: TodoType) {
       onDrop={() => console.log('dropped')}
     >
       <div
-        contentEditable={editable}
+        contentEditable={false}
         suppressContentEditableWarning={true}
         onBlur={editTitle}
-        onFocus={() => setEditable(true)}
+        onFocus={handleOnFocus}
         spellCheck={false}
         className={`title ${
         state === 'finished' && 'strikeout toBackground'
@@ -75,10 +76,10 @@ function TodoItem({id, title, task, state, color}: TodoType) {
       }`}>{title}</div>
       {showDetails &&
         <div
-          contentEditable={editable}
-          onFocus={() => setEditable(true)}
+          contentEditable={false}
           suppressContentEditableWarning={true}
           onBlur={editTask}
+          onFocus={handleOnFocus}
           spellCheck={false}
           className={'task'}
         >{task}</div>}
