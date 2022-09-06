@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react'
+import React, {useContext, useRef, useState} from 'react'
 import './TodoItem.css'
 import {TodoContext} from '../context/TodoContext'
 import {Types, TodoType} from '../context/reducers'
@@ -51,9 +51,15 @@ function TodoItem({id, title, task, state, color}: TodoType) {
   }
 
   const editTask = (e:any) => {
-    todosDispatch({type: Types.Update, payload: {
+    let t:TodoType
+    if (taskRef.current != null) {
+      t = taskRef.current
+    } else {
+      t = {
         id, title, task: e.currentTarget.textContent, state, color
-      }})
+      }
+    }
+    todosDispatch({type: Types.Update, payload: t})
     setEditable(false)
   }
 
@@ -61,6 +67,8 @@ function TodoItem({id, title, task, state, color}: TodoType) {
     console.log('focus')
     setEditable(true)
   }
+
+  const taskRef = useRef<TodoType>()
 
   return (
     <div
@@ -84,22 +92,27 @@ function TodoItem({id, title, task, state, color}: TodoType) {
       {showDetails &&
        <div
          style={{whiteSpace: 'pre-wrap'}}
+         contentEditable={editable}
+         suppressContentEditableWarning={true}
+         onBlur={editTask}
+         onClick={handleOnFocus}
+         spellCheck={false}
          onKeyDown={(event) => {
+           if (event.key === 'Tab') {
+             event.preventDefault()
+             document.execCommand('insertText', false, '\t');
+             taskRef.current = {
+               id, title, task: event.currentTarget.innerText, state, color
+             }
+           }
            if (event.key === 'Enter') {
              event.preventDefault()
              document.execCommand('insertText', false, '\n');
-             console.log('keydown', event.currentTarget.innerText)
-             // task: event.nativeEvent.explicitOriginalTarget.innerText,
-             todosDispatch({type: Types.Update, payload: {
-                 id, title, task: event.currentTarget.innerText, state, color
-               }})
+             taskRef.current = {
+               id, title, task: event.currentTarget.innerText, state, color
+             }
            }
          }}
-          contentEditable={editable}
-          suppressContentEditableWarning={true}
-          onBlur={editTask}
-          onClick={handleOnFocus}
-          spellCheck={false}
           className={'task'}
       >{task}</div>}
       <div className={'buttons'}>
