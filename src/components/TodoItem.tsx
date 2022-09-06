@@ -64,7 +64,6 @@ function TodoItem({id, title, task, state, color}: TodoType) {
   }
 
   const handleOnFocus = () => {
-    console.log('focus')
     setEditable(true)
   }
 
@@ -74,7 +73,7 @@ function TodoItem({id, title, task, state, color}: TodoType) {
     <div
       className={'TodoItem'}
       style={{backgroundColor: `rgb(${color.red},${color.green},${color.blue}`}}
-      onDrop={() => console.log('dropped')}
+      // onDrop={() => console.log('dropped')}
     >
       <div
         contentEditable={editable}
@@ -111,7 +110,6 @@ function TodoItem({id, title, task, state, color}: TodoType) {
            }
          }}
          onKeyUp={(event) => {
-           // console.log('keyup')
            taskRef.current = {
              id, title, task: event.currentTarget.innerText, state, color
            }
