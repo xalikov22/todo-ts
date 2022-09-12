@@ -16,7 +16,7 @@ li {
 .todoInput {
   display: flex;
   justify-content: space-around;
-  width: 20rem;
+  /*width: 20rem;*/
 }
 
 .App {
