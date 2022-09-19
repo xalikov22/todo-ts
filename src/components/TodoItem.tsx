@@ -1,4 +1,4 @@
-import React, {useContext, useRef, useState} from 'react'
+import React, {FocusEventHandler, useContext, useRef, useState} from 'react'
 import './TodoItem.css'
 import {TodoContext} from '../context/TodoContext'
 import {Types, TodoType} from '../context/reducers'
@@ -43,20 +43,20 @@ function TodoItem({id, title, task, state, color}: TodoType) {
     return 'Show Details'
   }
 
-  const editTitle = (e:any) => {
+  const editTitle:FocusEventHandler<HTMLDivElement> = (e): void => {
     todosDispatch({type: Types.Update, payload: {
-      id, title: e.currentTarget.textContent, task, state, color
+      id, title: e.currentTarget.textContent!, task, state, color
     }})
     setEditable(false)
   }
 
-  const editTask = (e:any) => {
+  const editTask:FocusEventHandler<HTMLDivElement> = (e): void => {
     let t:TodoType
     if (taskRef.current != null) {
       t = taskRef.current
     } else {
       t = {
-        id, title, task: e.currentTarget.textContent, state, color
+        id, title, task: e.currentTarget.textContent!, state, color
       }
     }
     todosDispatch({type: Types.Update, payload: t})
@@ -73,7 +73,6 @@ function TodoItem({id, title, task, state, color}: TodoType) {
     <div
       className={'TodoItem'}
       style={{backgroundColor: `rgb(${color.red},${color.green},${color.blue}`}}
-      // onDrop={() => console.log('dropped')}
     >
       <div
         contentEditable={editable}
@@ -99,11 +98,11 @@ function TodoItem({id, title, task, state, color}: TodoType) {
          onKeyDown={(event) => {
            if (event.key === 'Tab') {
              event.preventDefault()
-             document.execCommand('insertText', false, '\t');
+             document.execCommand('insertText', false, '\t')
            }
            if (event.key === 'Enter') {
              event.preventDefault()
-             document.execCommand('insertText', false, '\n');
+             document.execCommand('insertText', false, '\n')
            }
            taskRef.current = {
              id, title, task: event.currentTarget.innerText, state, color

@@ -11,13 +11,12 @@ function NewTodo() {
 
   const {todosDispatch} = useContext(TodoContext)
 
-  const onClick = () => {
+  const onClick = (): void => {
     const color = {
       red: Math.floor(Math.random() * 100 + 150),
       green: Math.floor(Math.random() * 100 + 150),
       blue: Math.floor(Math.random() * 100 + 150)
     }
-    // @ts-ignore
     todosDispatch({
       type: Types.Create,
       payload: {
@@ -28,6 +27,7 @@ function NewTodo() {
         color: color
       }
     })
+
     setItemTitle('')
     setItemText('')
   }

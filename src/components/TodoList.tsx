@@ -1,4 +1,4 @@
-import React, {useContext, useEffect} from 'react'
+import React, {DragEventHandler, useContext, useEffect} from 'react'
 import {TodoContext} from '../context/TodoContext'
 import {TodoType, Types} from '../context/reducers'
 import TodoItem from './TodoItem'
@@ -28,13 +28,13 @@ function TodoList() {
     return arr
   })
 
-  const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
-    event.preventDefault()
+  const handleDrop:DragEventHandler<HTMLDivElement> = (e): void => {
+    e.preventDefault()
     if (todosState.todos.length < 2) {
       return
     }
-    const targetId = Number(event.currentTarget.id.split('_')[1])
-    const sourceId = Number(event.dataTransfer.getData('text').split('_')[1])
+    const targetId = Number(e.currentTarget.id.split('_')[1])
+    const sourceId = Number(e.dataTransfer.getData('text').split('_')[1])
     todosDispatch({
       type: Types.Relist,
       payload: swap(todosState.todos, sourceId, targetId)
