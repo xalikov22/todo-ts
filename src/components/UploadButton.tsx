@@ -8,7 +8,7 @@ function UploadButton() {
   const hiddenFileInput = React.useRef(initialRef)
   const {todosDispatch} = useContext(TodoContext)
 
-  const handleClick = () => {
+  const handleClick = (): void => {
     if (hiddenFileInput.current == null) return
     hiddenFileInput.current.click()
   }
