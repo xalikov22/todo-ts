@@ -1,8 +1,9 @@
-import React, {ChangeEvent, useContext, useEffect, useState} from 'react'
+import React, {useContext, useEffect} from 'react'
 import {TodoContext} from '../context/TodoContext'
 import {TodoType, Types} from '../context/reducers'
 import TodoItem from './TodoItem'
-import {uuid} from '../util'
+import NewTodo from './NewTodo'
+import DownloadRestore from './DownloadRestore'
 
 function TodoList() {
 
@@ -11,30 +12,6 @@ function TodoList() {
   useEffect(() => {
     localStorage.setItem('todoApp', JSON.stringify(todosState.todos))
   }, [todosState])
-
-  const [itemText, setItemText] = useState('')
-  const [itemTitle, setItemTitle] = useState('')
-
-  const onClick = () => {
-    const color = {
-      red: Math.floor(Math.random() * 100 + 150),
-      green: Math.floor(Math.random() * 100 + 150),
-      blue: Math.floor(Math.random() * 100 + 150)
-    }
-    // @ts-ignore
-    todosDispatch({
-      type: Types.Create,
-      payload: {
-        id: uuid(),
-        title: itemTitle,
-        task: itemText,
-        state: 'todo',
-        color: color
-      }
-    })
-    setItemTitle('')
-    setItemText('')
-  }
 
   const handleDragStart = (e: React.DragEvent<HTMLDivElement>) => {
     e.dataTransfer.setData('text', e.currentTarget.id)
@@ -64,84 +41,9 @@ function TodoList() {
     })
   }
 
-  const downloadJson = () => {
-      const saveTemplateAsFile = (filename:string, dataObjToWrite:any) => {
-        const blob = new Blob([JSON.stringify(dataObjToWrite)], {type: 'text/json'})
-        const link = document.createElement('a')
-
-        link.download = filename
-        link.href = window.URL.createObjectURL(blob)
-        link.dataset.downloadurl = ['text/json', link.download, link.href].join(':')
-
-        const evt = new MouseEvent('click', {
-          view: window,
-          bubbles: true,
-          cancelable: true,
-        })
-
-        link.dispatchEvent(evt)
-        link.remove()
-      }
-    saveTemplateAsFile('todos.json', todosState.todos)
-  }
-
-  const onChangeFile = async (e:ChangeEvent<HTMLInputElement>) => {
-    if (!e.target) return
-    if (e.target.files && e.target.files[0]) {
-      const updatedJSON = e.target.files[0]
-      console.log(updatedJSON)
-      const fileReader = new FileReader()
-      fileReader.readAsText(e.target.files[0], 'UTF-8')
-      fileReader.onload = e => {
-        const target = e.target
-        const result = target?.result
-        let newTodos
-        try {
-          newTodos = JSON.parse(String(result))
-        } catch {}
-        todosDispatch({
-          type: Types.Relist,
-          payload: newTodos
-        })
-      }
-    }
-  }
 
   return (
     <div>
-      <div>
-        <div className={'todoInput'}>
-          <h4>TITLE</h4>
-          <input
-            type={'text'}
-            onChange={e => setItemTitle(e.currentTarget.value)}
-            value={itemTitle}
-            style={{width:'20rem'}}
-          />
-        </div>
-        <div className={'todoInput'}>
-          <h4>TASK</h4>
-          <textarea
-            onChange={e => setItemText(e.currentTarget.value)}
-            value={itemText}
-            style={{width:'20rem'}}
-          />
-        </div>
-        <div>
-          <button
-            onClick={onClick}
-            disabled={!(itemTitle.length > 0 && itemText.length > 0)}
-          >Add Task</button> &nbsp;
-          <button
-            onClick={downloadJson}
-          >Download to Disk</button> &nbsp;
-          Restore: <input
-            type='file'
-            id='input_json'
-            onChange={onChangeFile}
-          />
-        </div>
-      </div>
       <div>
         {todosState.todos?.map((item: TodoType, index) =>
           <div
@@ -165,6 +67,8 @@ function TodoList() {
             </div>
           </div>)}
       </div>
+      <NewTodo />
+      <DownloadRestore />
       <input type={'text'}/>
     </div>
   )
