@@ -63,7 +63,7 @@ function TodoItem({id, title, task, state, color}: TodoType) {
     setEditable(false)
   }
 
-  const handleOnFocus = () => {
+  const handleOnFocus = (): void => {
     setEditable(true)
   }
 
