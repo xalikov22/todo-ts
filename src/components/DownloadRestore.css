@@ -1,0 +1,21 @@
+.DownloadRestore {
+    position: relative;
+    display: flex;
+    background-color: white;
+    color: black;
+    justify-content: space-around;
+    /*flex-direction: column;*/
+    align-items: center;
+    border-radius: 1rem;
+    font-size: 1.2rem;
+    width: var(--app-width);
+    margin: 1rem;
+    padding: .8rem;
+    border: 1px solid silver;
+}
+
+.DownloadRestore .FileInput {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
