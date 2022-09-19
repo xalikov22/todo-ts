@@ -1,4 +1,4 @@
-import React, {useContext} from 'react'
+import React, {ChangeEventHandler, useContext} from 'react'
 import {Types} from '../context/reducers'
 import {TodoContext} from '../context/TodoContext'
 
@@ -13,7 +13,7 @@ function UploadButton() {
     hiddenFileInput.current.click()
   }
 
-  const handleChange = async (e:any) => {
+  const handleChange:ChangeEventHandler<HTMLInputElement> = async (e) => {
     if (!e.target) return
     if (e.target.files && e.target.files[0]) {
       if (confirm(`Use tasks from "${e.target.files[0].name}"?\nThis will overwrite all current tasks.`)) {
