@@ -3,6 +3,7 @@ import {TodoContext} from '../context/TodoContext'
 import {TodoType, Types} from '../context/reducers'
 import TodoItem from './TodoItem'
 import ButtonBox from './ButtonBox'
+import Stats from './Stats'
 
 function TodoList() {
 
@@ -67,6 +68,7 @@ function TodoList() {
           </div>)}
       </div>
       <ButtonBox />
+      <Stats />
       <input type={'text'}/>
     </div>
   )
