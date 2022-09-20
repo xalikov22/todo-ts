@@ -11,7 +11,7 @@
     width: var(--app-width);
     margin: 1rem;
     padding: .8rem;
-    border: 1px solid silver;
+    /*border: 1px solid silver;*/
 }
 
 .ButtonBox .FileInput {
