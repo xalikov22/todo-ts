@@ -57,6 +57,7 @@ function ButtonBox() {
       >Add Task</button>
       <button
         onClick={downloadJson}
+        disabled={todosState.todos.length == 0}
       >Download</button>
       <UploadButton />
     </div>
