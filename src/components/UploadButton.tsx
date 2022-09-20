@@ -41,7 +41,7 @@ function UploadButton() {
     <div>
       <button
         onClick={handleClick}
-      >Upload</button>
+      >upload</button>
       <input
         type={'file'}
         ref={hiddenFileInput}
