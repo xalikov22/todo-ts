@@ -21,7 +21,7 @@ function ButtonBox() {
         payload: {
           id: uuid(),
           title: 'New Task',
-          task: '- --add new task--\n- do more stuff',
+          task: '- ~~add new task~~\n- do more stuff',
           state: 'todo',
           color: color
         }
