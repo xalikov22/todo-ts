@@ -7,7 +7,7 @@ function Stats() {
   const {todosState} = useContext(TodoContext)
 
   const todo =
-    todosState.todos.filter(item => item.state === 'todo').length -
+    todosState.todos.length -
     todosState.todos.filter(item => item.state === 'doing').length -
     todosState.todos.filter(item => item.state === 'finished').length
 
