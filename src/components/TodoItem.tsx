@@ -49,6 +49,7 @@ function TodoItem({id, title, task, state, color}: TodoType) {
     todosDispatch({type: Types.Update, payload: {
       id, title: e.currentTarget.textContent!, task, state, color
     }})
+    setMarkupTask(replacer(markupTask))
   }
 
   const editTask:FocusEventHandler<HTMLDivElement> = (e): void => {
