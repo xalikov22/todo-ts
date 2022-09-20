@@ -1,4 +1,5 @@
-import React, {FocusEventHandler, useContext, useRef, useState} from 'react'
+import React, {FocusEventHandler, MouseEventHandler,
+  useContext, useEffect, useRef, useState} from 'react'
 import './TodoItem.css'
 import {TodoContext} from '../context/TodoContext'
 import {Types, TodoType} from '../context/reducers'
@@ -9,7 +10,7 @@ function TodoItem({id, title, task, state, color}: TodoType) {
 
   const [showDetails, setShowDetails] = useState(false)
 
-  const [editable, setEditable] = useState(false)
+  const [markupTask, setMarkupTask] = useState('')
 
   const onClickDelete = (): void => {
     if (confirm(`Delete todo item "${title}"?`)) {
@@ -47,7 +48,6 @@ function TodoItem({id, title, task, state, color}: TodoType) {
     todosDispatch({type: Types.Update, payload: {
       id, title: e.currentTarget.textContent!, task, state, color
     }})
-    setEditable(false)
   }
 
   const editTask:FocusEventHandler<HTMLDivElement> = (e): void => {
@@ -60,14 +60,26 @@ function TodoItem({id, title, task, state, color}: TodoType) {
       }
     }
     todosDispatch({type: Types.Update, payload: t})
-    setEditable(false)
+    setMarkupTask(replacer(markupTask))
   }
 
-  const handleOnFocus = (): void => {
-    setEditable(true)
+  const handleOnFocus:MouseEventHandler<HTMLDivElement> = (e): void => {
+    setMarkupTask(task)
+    e.currentTarget.focus()
   }
 
   const taskRef = useRef<TodoType>()
+
+  function replacer(s: string) {
+    const re = new RegExp(/--.+--/, 'gi')
+    return s.replace(re, (match) => {
+      return `finished ${match.slice(2, -2)}`
+    })
+  }
+
+  useEffect(() => {
+    setMarkupTask(replacer(task))
+  }, [task])
 
   return (
     <div
@@ -75,7 +87,7 @@ function TodoItem({id, title, task, state, color}: TodoType) {
       style={{backgroundColor: `rgb(${color.red},${color.green},${color.blue}`}}
     >
       <div
-        contentEditable={editable}
+        contentEditable={'true'}
         suppressContentEditableWarning={true}
         onBlur={editTitle}
         onClick={handleOnFocus}
@@ -90,7 +102,7 @@ function TodoItem({id, title, task, state, color}: TodoType) {
       {showDetails &&
        <div
          style={{whiteSpace: 'pre-wrap'}}
-         contentEditable={editable}
+         contentEditable={'true'}
          suppressContentEditableWarning={true}
          onBlur={editTask}
          onClick={handleOnFocus}
@@ -114,7 +126,7 @@ function TodoItem({id, title, task, state, color}: TodoType) {
            }
          }}
           className={'task'}
-      >{task}</div>}
+      >{markupTask}</div>}
       <div className={'buttons'}>
         <button
           className={'btnCircle btnBackgroundColor btnColor'}
