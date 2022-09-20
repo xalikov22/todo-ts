@@ -1,11 +1,33 @@
 import React, {useContext} from 'react'
 import {TodoContext} from '../context/TodoContext'
-import './DownloadRestore.css'
+import './ButtonBox.css'
 import UploadButton from './UploadButton'
+import {Types} from '../context/reducers'
+import {uuid} from '../util'
 
-function DownloadRestore() {
+function ButtonBox() {
 
-  const {todosState} = useContext(TodoContext)
+  const {todosState, todosDispatch} = useContext(TodoContext)
+
+  const newTask = (): void => {
+    const color = {
+      red: Math.floor(Math.random() * 100 + 150),
+      green: Math.floor(Math.random() * 100 + 150),
+      blue: Math.floor(Math.random() * 100 + 150)
+    }
+    if (confirm('Create new task?')) {
+      todosDispatch({
+        type: Types.Create,
+        payload: {
+          id: uuid(),
+          title: 'New Task',
+          task: '- -- Finished adding new item --\n- do more stuff',
+          state: 'todo',
+          color: color
+        }
+      })
+    }
+  }
 
   const downloadJson = () => {
     const saveTemplateAsFile = (filename:string, dataObjToWrite:any) => {
@@ -29,7 +51,10 @@ function DownloadRestore() {
   }
 
   return (
-    <div className={'DownloadRestore'}>
+    <div className={'ButtonBox'}>
+      <button
+        onClick={newTask}
+      >Add Task</button>
       <button
         onClick={downloadJson}
       >Download</button>
@@ -38,4 +63,4 @@ function DownloadRestore() {
   )
 }
 
-export default DownloadRestore
+export default ButtonBox

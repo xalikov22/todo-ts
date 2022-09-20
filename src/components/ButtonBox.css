@@ -1,4 +1,4 @@
-.DownloadRestore {
+.ButtonBox {
     position: relative;
     display: flex;
     background-color: white;
@@ -14,7 +14,7 @@
     border: 1px solid silver;
 }
 
-.DownloadRestore .FileInput {
+.ButtonBox .FileInput {
     display: flex;
     justify-content: center;
     align-items: center;

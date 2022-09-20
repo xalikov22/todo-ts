@@ -2,8 +2,7 @@ import React, {DragEventHandler, useContext, useEffect} from 'react'
 import {TodoContext} from '../context/TodoContext'
 import {TodoType, Types} from '../context/reducers'
 import TodoItem from './TodoItem'
-import NewTodo from './NewTodo'
-import DownloadRestore from './DownloadRestore'
+import ButtonBox from './ButtonBox'
 
 function TodoList() {
 
@@ -67,8 +66,7 @@ function TodoList() {
             </div>
           </div>)}
       </div>
-      <NewTodo />
-      <DownloadRestore />
+      <ButtonBox />
       <input type={'text'}/>
     </div>
   )
