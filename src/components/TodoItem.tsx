@@ -1,5 +1,6 @@
 import React, {FocusEventHandler, MouseEventHandler,
   useContext, useEffect, useRef, useState} from 'react'
+import parse from 'html-react-parser'
 import './TodoItem.css'
 import {TodoContext} from '../context/TodoContext'
 import {Types, TodoType} from '../context/reducers'
@@ -70,10 +71,10 @@ function TodoItem({id, title, task, state, color}: TodoType) {
 
   const taskRef = useRef<TodoType>()
 
-  function replacer(s: string) {
+  function replacer(s: string): string {
     const re = new RegExp(/--.+--/, 'gi')
     return s.replace(re, (match) => {
-      return `finished ${match.slice(2, -2)}`
+      return `✓<span class="finished">${match.slice(2, -2)}</span>`
     })
   }
 
@@ -126,7 +127,7 @@ function TodoItem({id, title, task, state, color}: TodoType) {
            }
          }}
           className={'task'}
-      >{markupTask}</div>}
+      >{parse(markupTask)}</div>}
       <div className={'buttons'}>
         <button
           className={'btnCircle btnBackgroundColor btnColor'}
