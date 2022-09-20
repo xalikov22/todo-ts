@@ -10,7 +10,7 @@ function Stats() {
     <div className={`Stats`}>
       {todosState.todos.length} thing{todosState.todos.length == 1 ? '' : 's'} todo, &nbsp;
       {todosState.todos.filter((item) => item.state == 'doing').length} doing, &nbsp;
-      {todosState.todos.filter((item) => item.state == 'finished').length} finished
+      {todosState.todos.filter((item) => item.state == 'finished').length} done
     </div>
   )
 }
