@@ -73,7 +73,7 @@ function TodoItem({id, title, task, state, color}: TodoType) {
   const taskRef = useRef<TodoType>()
 
   function replacer(s: string): string {
-    const re = new RegExp(/--.+--/, 'gi')
+    const re = new RegExp(/~~.+~~/, 'gi')
     return s.replace(re, (match) => {
       return `✓<span class="finished">${match.slice(2, -2)}</span>`
     })
