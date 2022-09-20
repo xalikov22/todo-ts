@@ -6,10 +6,16 @@ function Stats() {
 
   const {todosState} = useContext(TodoContext)
 
+  const todo =
+    todosState.todos.filter(item => item.state === 'todo').length -
+    todosState.todos.filter(item => item.state === 'doing').length -
+    todosState.todos.filter(item => item.state === 'finished').length
+
   return (
     <div className={`Stats`}>
-      {todosState.todos.length} thing{todosState.todos.length == 1 ? '' : 's'} todo, &nbsp;
+      {todosState.todos.length} task{todosState.todos.length == 1 ? '' : 's'}, &nbsp;
       {todosState.todos.filter((item) => item.state == 'doing').length} doing, &nbsp;
+      {todo} to do, &nbsp;
       {todosState.todos.filter((item) => item.state == 'finished').length} done
     </div>
   )
