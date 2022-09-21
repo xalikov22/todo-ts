@@ -13,25 +13,20 @@
 }
 
 .TodoItem .title {
-    line-height: 2rem;
+    line-height: 1.8rem;
     font-weight: bolder;
     align-self: start;
     padding: 0 1rem;
     font-size: 110%;
     text-decoration-thickness: 4px;
     opacity: 80%;
-    white-space: pre-wrap;       /* css-3 */
-    white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
-    /*white-space: -pre-wrap;      !* Opera 4-6 *!*/
-    white-space: -o-pre-wrap;    /* Opera 7 */
+    white-space: pre-wrap;
     word-wrap: break-word;       /* Internet Explorer 5.5+ */
+    transform: translateY(.2rem);
 }
 
 div {
-    white-space: pre-wrap;       /* css-3 */
-    white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
-    /*white-space: -pre-wrap;      !* Opera 4-6 *!*/
-    white-space: -o-pre-wrap;    /* Opera 7 */
+    white-space: pre-wrap;
     word-wrap: break-word;       /* Internet Explorer 5.5+ */
 }
 
@@ -63,10 +58,7 @@ div {
 .TodoItem .task {
     align-self: start;
     padding: 1rem;
-    white-space: pre-wrap;       /* css-3 */
-    white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
-    /*white-space: -pre-wrap;      !* Opera 4-6 *!*/
-    white-space: -o-pre-wrap;    /* Opera 7 */
+    white-space: pre-wrap;
     word-wrap: break-word;       /* Internet Explorer 5.5+ */
     text-align: left;
 }
@@ -74,7 +66,7 @@ div {
 .buttons {
     position: absolute;
     right: .8rem;
-    top: .8rem;
+    top: .7rem;
 }
 
 .TodoItem .buttons {
@@ -86,13 +78,13 @@ div {
 
 .TodoItem .btnCircle {
     border-radius: 50% ;
-    padding: 1rem;
+    padding: .6rem;
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 1rem;
-    height: 1rem;
-    outline:none;
+    width: .6rem;
+    height: .6rem;
+    outline: none;
     border: none;
     opacity: 50%;
 }
@@ -106,8 +98,8 @@ div {
 }
 
 .TodoItem img {
-    width: 1rem;
-    height: 1rem;
+    /*width: .6rem;*/
+    /*height: .6rem;*/
 }
 
 .finished {
