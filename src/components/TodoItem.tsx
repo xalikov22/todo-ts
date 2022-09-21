@@ -86,8 +86,10 @@ function TodoItem({id, title, task, state, color}: TodoType) {
   }, [task])
 
   const onClickMoveToTop:MouseEventHandler<HTMLButtonElement> = (e): void => {
-    const listId = e.currentTarget.parentElement?.parentElement?.parentElement?.id
-    todosDispatch({type: Types.MovTop, payload: {id: Number(listId?.split('_')[1])}})
+    if (confirm(`Move task "${title}" to top?`)) {
+      const listId = e.currentTarget.parentElement?.parentElement?.parentElement?.id
+      todosDispatch({type: Types.MovTop, payload: {id: Number(listId?.split('_')[1])}})
+    }
   }
 
   return (
