@@ -148,17 +148,17 @@ function TodoItem({id, title, task, state, color}: TodoType) {
         </button>
         <button
           className={'btnCircle btnBackgroundColor btnColor'}
-          title={`move to top`}
-          onClick={onClickMoveToTop}
-        >
-
-        </button>
-        <button
-          className={'btnCircle btnBackgroundColor btnColor'}
           onClick={onClickFinish}
           title={showTaskState()}
         >
           {/*<img src={DeleteIcon} alt={'Delete'} title={'Delete'}/>*/}
+        </button>
+        <button
+          className={'btnCircle btnBackgroundColor btnColor'}
+          title={`move to top`}
+          onClick={onClickMoveToTop}
+        >
+
         </button>
         <button
           className={'btnCircle btnBackgroundColor btnColor'}
