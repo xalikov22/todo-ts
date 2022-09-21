@@ -77,11 +77,8 @@ function TodoItem({id, title, task, state, color}: TodoType) {
     return s.replace(re, (match) => {
       return `✓<span class="finished">${match.slice(2, -2)}</span>`
     })
-    // This doesn't work:
-    //   .replace(/https?:\/\/\S+/gi, (match) => {
-    //   return `<a onclick="alert('aap')" href="${match}" target="_blank">${match}</a>`
-    // })
-    // because the onclick handler is not executed.
+      .replace(/\n- /g, '\n• ')
+      .replace(/^- /, '• ')
   }
 
   useEffect(() => {
