@@ -85,6 +85,13 @@ function TodoItem({id, title, task, state, color}: TodoType) {
     setMarkupTask(replacer(task))
   }, [task])
 
+  const onClickMoveToTop:MouseEventHandler<HTMLButtonElement> = (e): void => {
+    // console.log(e.currentTarget.parentElement?.parentElement?.parentElement?.id)
+    const listId = e.currentTarget.parentElement?.parentElement?.parentElement?.id
+    // if (listId == null) return
+    todosDispatch({type: Types.MovTop, payload: {id: Number(listId?.split('_')[1])}})
+  }
+
   return (
     <div
       className={'TodoItem'}
@@ -138,6 +145,13 @@ function TodoItem({id, title, task, state, color}: TodoType) {
           title={showDetailsText()}
         >
           {/*<img src={DeleteIcon} alt={'Delete'} title={'Delete'}/>*/}
+        </button>
+        <button
+          className={'btnCircle btnBackgroundColor btnColor'}
+          title={`move to top`}
+          onClick={onClickMoveToTop}
+        >
+
         </button>
         <button
           className={'btnCircle btnBackgroundColor btnColor'}
