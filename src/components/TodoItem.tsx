@@ -73,10 +73,15 @@ function TodoItem({id, title, task, state, color}: TodoType) {
   const taskRef = useRef<TodoType>()
 
   function replacer(s: string): string {
-    const re = new RegExp(/~~.+~~/, 'gi')
+    const re = new RegExp(/~~.+~~/gi)
     return s.replace(re, (match) => {
       return `✓<span class="finished">${match.slice(2, -2)}</span>`
     })
+    // This doesn't work:
+    //   .replace(/https?:\/\/\S+/gi, (match) => {
+    //   return `<a onclick="alert('aap')" href="${match}" target="_blank">${match}</a>`
+    // })
+    // because the onclick handler is not executed.
   }
 
   useEffect(() => {
