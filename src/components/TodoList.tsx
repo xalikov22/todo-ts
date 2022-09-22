@@ -1,4 +1,4 @@
-import React, {DragEventHandler, useContext, useEffect} from 'react'
+import React, {DragEventHandler, useContext, useEffect, useState} from 'react'
 import {TodoContext} from '../context/TodoContext'
 import {TodoType, Types} from '../context/reducers'
 import TodoItem from './TodoItem'
@@ -8,12 +8,14 @@ import Stats from './Stats'
 function TodoList() {
 
   const {todosState, todosDispatch} = useContext(TodoContext)
+  const [editable, setEditable] = useState(true)
 
   useEffect(() => {
     localStorage.setItem('todoApp', JSON.stringify(todosState.todos))
   }, [todosState])
 
   const handleDragStart = (e: React.DragEvent<HTMLDivElement>) => {
+    setEditable(false)
     e.dataTransfer.setData('text', e.currentTarget.id)
   }
 
@@ -29,18 +31,25 @@ function TodoList() {
   })
 
   const handleDrop:DragEventHandler<HTMLDivElement> = (e): void => {
+
     e.preventDefault()
+
     if (todosState.todos.length < 2) {
       return
     }
+
     const targetId = Number(e.currentTarget.id.split('_')[1])
     const sourceId = Number(e.dataTransfer.getData('text').split('_')[1])
-    todosDispatch({
-      type: Types.Relist,
-      payload: swap(todosState.todos, sourceId, targetId)
-    })
-  }
 
+    setTimeout(() => {
+      todosDispatch({
+        type: Types.Relist,
+        payload: swap(todosState.todos, sourceId, targetId)
+      })
+      setEditable(true)
+    }, 100)
+
+  }
 
   return (
     <div>
@@ -51,18 +60,22 @@ function TodoList() {
             id={`parent_${index}`}
             onDragOver={enableDropping}
             onDrop={handleDrop}
+            onDragEnd={() => setEditable(true)}
           >
             <div
               draggable={todosState.todos.length > 1}
               onDragStart={handleDragStart}
-              id={`child_${index}`}
+              id={`todo^child_${index}`}
             >
               <TodoItem
-                id={item.id}
-                task={item.task}
-                title={item.title}
-                state={item.state}
-                color={item.color}
+                todo={{
+                  id: item.id,
+                  task: item.task,
+                  title: item.title,
+                  state: item.state,
+                  color: item.color
+                }}
+                editable={editable}
               />
             </div>
           </div>)}

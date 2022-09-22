@@ -5,12 +5,16 @@ import './TodoItem.css'
 import {TodoContext} from '../context/TodoContext'
 import {Types, TodoType} from '../context/reducers'
 
-function TodoItem({id, title, task, state, color}: TodoType) {
+type TodoItemProps = {
+  todo: TodoType
+  editable: boolean
+}
 
+function TodoItem({todo, editable}: TodoItemProps) {
+
+  const {id, title, task, state, color} = todo
   const {todosDispatch} = useContext(TodoContext)
-
   const [showDetails, setShowDetails] = useState(false)
-
   const [markupTask, setMarkupTask] = useState('')
 
   const onClickDelete = (): void => {
@@ -46,19 +50,22 @@ function TodoItem({id, title, task, state, color}: TodoType) {
   }
 
   const editTitle:FocusEventHandler<HTMLDivElement> = (e): void => {
+    if (e.currentTarget.textContent == null) return
     todosDispatch({type: Types.Update, payload: {
-      id, title: e.currentTarget.textContent!, task, state, color
+      id, title: e.currentTarget.textContent, task, state, color
     }})
     setMarkupTask(replacer(markupTask))
   }
 
-  const editTask:FocusEventHandler<HTMLDivElement> = (e): void => {
+  const editTask:FocusEventHandler<HTMLDivElement> = (): void => {
     let t:TodoType
     if (taskRef.current != null) {
-      t = taskRef.current
+      t = {
+        ...taskRef.current
+      }
     } else {
       t = {
-        id, title, task: e.currentTarget.textContent!, state, color
+        id, title, task, state, color
       }
     }
     todosDispatch({type: Types.Update, payload: t})
@@ -98,7 +105,7 @@ function TodoItem({id, title, task, state, color}: TodoType) {
       style={{backgroundColor: `rgb(${color.red},${color.green},${color.blue}`}}
     >
       <div
-        contentEditable={'true'}
+        contentEditable={editable}
         suppressContentEditableWarning={true}
         onBlur={editTitle}
         onClick={handleOnFocus}
@@ -113,7 +120,7 @@ function TodoItem({id, title, task, state, color}: TodoType) {
       {showDetails &&
        <div
          style={{whiteSpace: 'pre-wrap'}}
-         contentEditable={'true'}
+         contentEditable={editable}
          suppressContentEditableWarning={true}
          onBlur={editTask}
          onClick={handleOnFocus}
