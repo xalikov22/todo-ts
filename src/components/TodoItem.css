@@ -13,7 +13,7 @@
 }
 
 .TodoItem .title {
-    line-height: 1.8rem;
+    line-height: 1.7rem;
     font-weight: bolder;
     align-self: start;
     padding: 0 1rem;
@@ -22,7 +22,7 @@
     opacity: 80%;
     white-space: pre-wrap;
     word-wrap: break-word;       /* Internet Explorer 5.5+ */
-    transform: translateY(.2rem);
+    transform: translateY(.09rem);
 }
 
 div {
