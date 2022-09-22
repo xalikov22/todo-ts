@@ -76,7 +76,6 @@ export const todoReducer = (
     case Types.Update:
       const s = [...state]
       const index = s.findIndex(item => item.id === action.payload.id)
-      // s[index].title = [...action.payload.title].reverse().join('')
       s[index].title = action.payload.title
       s[index].task = action.payload.task
       return [...s]
