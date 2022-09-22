@@ -41,13 +41,11 @@ function TodoList() {
     const targetId = Number(e.currentTarget.id.split('_')[1])
     const sourceId = Number(e.dataTransfer.getData('text').split('_')[1])
 
-    setTimeout(() => {
-      todosDispatch({
-        type: Types.Relist,
-        payload: swap(todosState.todos, sourceId, targetId)
-      })
-      setEditable(true)
-    }, 100)
+    todosDispatch({
+      type: Types.Relist,
+      payload: swap(todosState.todos, sourceId, targetId)
+    })
+    setEditable(true)
 
   }
 
