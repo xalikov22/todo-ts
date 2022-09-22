@@ -13,7 +13,7 @@ function Stats() {
 
   return (
     <div className={`Stats`}>
-      {speak(todosState.todos.length)} task{todosState.todos.length == 1 ? '' : 's'} •
+      {speak(todosState.todos.length)} task{todosState.todos.length == 1 ? '' : 's'} total •
       doing {speak(todosState.todos.filter((item) => item.state == 'doing').length)} •&nbsp;
       {speak(todo)} to do •&nbsp;
       {speak(todosState.todos.filter((item) => item.state == 'finished').length)} done
