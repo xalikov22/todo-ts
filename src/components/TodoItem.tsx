@@ -57,7 +57,7 @@ function TodoItem({todo, editable}: TodoItemProps) {
     setMarkupTask(replacer(markupTask))
   }
 
-  const editTask:FocusEventHandler<HTMLDivElement> = (): void => {
+  const editTask = (): void => {
     let t:TodoType
     if (taskRef.current != null) {
       t = {
