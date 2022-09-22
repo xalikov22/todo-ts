@@ -1,7 +1,7 @@
 .ButtonBox {
     position: relative;
     display: flex;
-    background-color: white;
+    background-color: lightsalmon;
     color: black;
     justify-content: space-around;
     /*flex-direction: column;*/
@@ -9,7 +9,8 @@
     border-radius: 1rem;
     font-size: 1.2rem;
     width: var(--app-width);
-    margin: 1rem;
+    /*margin: 1rem;*/
+    margin: 2rem 1rem;
     padding: .8rem;
     /*border: 1px solid silver;*/
 }
