@@ -18,7 +18,7 @@ function Stats() {
   return (
     <div className={`Stats`}>
       {currentUri !== '/' && `${currentUri.slice(1)} • `}
-      {total(todosState.todos, currentUri)}
+      {total(todosState.todos)}
       doing {speak(todosState.todos.filter((item) => item.state == 'doing').length)} •&nbsp;
       {speak(todo)} to do •&nbsp;
       {speak(finished)} done

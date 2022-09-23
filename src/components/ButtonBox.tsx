@@ -10,8 +10,6 @@ function ButtonBox() {
   const {todosState, todosDispatch} = useContext(TodoContext)
 
   const newTask = (): void => {
-    const uri = window.location.pathname
-    console.log('uri', uri)
     const color = {
       red: Math.floor(Math.random() * 100 + 150),
       green: Math.floor(Math.random() * 100 + 150),
@@ -22,7 +20,6 @@ function ButtonBox() {
         type: Types.Create,
         payload: {
           id: uuid(),
-          uri,
           title: 'New Task',
           task: '- ~~add new task~~\n- do more stuff',
           state: 'todo',

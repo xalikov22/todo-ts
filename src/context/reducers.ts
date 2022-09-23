@@ -103,7 +103,6 @@ export const todoReducer = (
     case Types.Delete:
       return [...state.filter(todo => todo.id !== action.payload.id)]
     case Types.Relist:
-      console.log('payload', action.payload)
       return [...action.payload]
     case Types.MovTop:
       const s2 = [...state]

@@ -17,8 +17,6 @@ function UploadButton() {
     if (!e.target) return
     if (e.target.files && e.target.files[0]) {
       if (confirm(`Use tasks from "${e.target.files[0].name}"?\nThis will overwrite all current tasks.`)) {
-        const updatedJSON = e.target.files[0]
-        console.log(updatedJSON)
         const fileReader = new FileReader()
         fileReader.readAsText(e.target.files[0], 'UTF-8')
         fileReader.onload = e => {

@@ -11,7 +11,6 @@ function TodoList() {
   const [editable, setEditable] = useState(true)
 
   useEffect(() => {
-    console.log('todosState', todosState)
     localStorage.setItem(`todoApp-${window.location.pathname}`, JSON.stringify(todosState.todos))
   }, [todosState])
 
@@ -38,8 +37,6 @@ function TodoList() {
     if (todosState.todos.length < 1) {
       return
     }
-
-    console.log('dropped')
 
     const targetId = Number(e.currentTarget.id.split('_')[1])
     const sourceId = Number(e.dataTransfer.getData('text').split('_')[1])
