@@ -80,7 +80,6 @@ function TodoList() {
       </div>
       <ButtonBox />
       <Stats />
-      {/*<input type={'text'}/>*/}
     </div>
   )
 }
