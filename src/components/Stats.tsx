@@ -5,6 +5,7 @@ import './Stats.css'
 function Stats() {
 
   const {todosState} = useContext(TodoContext)
+  const currentUri = window.location.pathname
 
   const todo =
     todosState.todos.length -
@@ -13,7 +14,7 @@ function Stats() {
 
   return (
     <div className={`Stats`}>
-      {speak(todosState.todos.length)} task{todosState.todos.length == 1 ? '' : 's'} total •
+      {speak(todosState.todos.filter(t => t.uri == currentUri).length)} task{todosState.todos.length == 1 ? '' : 's'} total •
       doing {speak(todosState.todos.filter((item) => item.state == 'doing').length)} •&nbsp;
       {speak(todo)} to do •&nbsp;
       {speak(todosState.todos.filter((item) => item.state == 'finished').length)} done

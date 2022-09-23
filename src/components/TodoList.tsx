@@ -9,6 +9,7 @@ function TodoList() {
 
   const {todosState, todosDispatch} = useContext(TodoContext)
   const [editable, setEditable] = useState(true)
+  const currentUri = window.location.pathname
 
   useEffect(() => {
     localStorage.setItem('todoApp', JSON.stringify(todosState.todos))
@@ -52,7 +53,8 @@ function TodoList() {
   return (
     <div>
       <div>
-        {todosState.todos?.map((item: TodoType, index) =>
+        {todosState.todos?.filter(todo => todo.uri == currentUri)
+          .map((item: TodoType, index) =>
           <div
             key={item.id}
             id={`parent_${index}`}
@@ -68,6 +70,7 @@ function TodoList() {
               <TodoItem
                 todo={{
                   id: item.id,
+                  uri: item.uri,
                   task: item.task,
                   title: item.title,
                   state: item.state,

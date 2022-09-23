@@ -12,7 +12,7 @@ type TodoItemProps = {
 
 function TodoItem({todo, editable}: TodoItemProps) {
 
-  const {id, title, task, state, color} = todo
+  const {id, uri, title, task, state, color} = todo
   const {todosDispatch} = useContext(TodoContext)
   const [showDetails, setShowDetails] = useState(false)
   const [markupTask, setMarkupTask] = useState('')
@@ -52,7 +52,7 @@ function TodoItem({todo, editable}: TodoItemProps) {
   const editTitle:FocusEventHandler<HTMLDivElement> = (e): void => {
     if (e.currentTarget.textContent == null) return
     todosDispatch({type: Types.Update, payload: {
-      id, title: e.currentTarget.textContent, task, state, color
+      id, uri, title: e.currentTarget.textContent, task, state, color
     }})
     setMarkupTask(replacer(markupTask))
   }
@@ -65,7 +65,7 @@ function TodoItem({todo, editable}: TodoItemProps) {
       }
     } else {
       t = {
-        id, title, task, state, color
+        id, uri, title, task, state, color
       }
     }
     todosDispatch({type: Types.Update, payload: t})
@@ -135,12 +135,12 @@ function TodoItem({todo, editable}: TodoItemProps) {
              document.execCommand('insertText', false, '\n')
            }
            taskRef.current = {
-             id, title, task: event.currentTarget.innerText, state, color
+             id, uri, title, task: event.currentTarget.innerText, state, color
            }
          }}
          onKeyUp={(event) => {
            taskRef.current = {
-             id, title, task: event.currentTarget.innerText, state, color
+             id, uri, title, task: event.currentTarget.innerText, state, color
            }
          }}
           className={'task'}
