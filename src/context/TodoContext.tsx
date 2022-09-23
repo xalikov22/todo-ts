@@ -30,7 +30,7 @@ type ProviderProps = {
 
 const TodoProvider = ({ children }: ProviderProps) => {
 
-  const localTodos = localStorage.getItem('todoApp')
+  const localTodos = localStorage.getItem(`todoApp-${window.location.pathname}`)
 
   let todos: InitialStateType = initialState
 

@@ -12,12 +12,16 @@ function Stats() {
     todosState.todos.filter(item => item.state === 'doing').length -
     todosState.todos.filter(item => item.state === 'finished').length
 
+  const finished =
+    todosState.todos.filter(item => item.state === 'finished').length
+
   return (
     <div className={`Stats`}>
-      {speak(todosState.todos.filter(t => t.uri == currentUri).length)} task{todosState.todos.length == 1 ? '' : 's'} total •
+      {currentUri !== '/' && `${currentUri.slice(1)} • `}
+      {total(todosState.todos, currentUri)}
       doing {speak(todosState.todos.filter((item) => item.state == 'doing').length)} •&nbsp;
       {speak(todo)} to do •&nbsp;
-      {speak(todosState.todos.filter((item) => item.state == 'finished').length)} done
+      {speak(finished)} done
     </div>
   )
 }
@@ -37,4 +41,18 @@ function speak(n: number): string {
   if (n === 9) return 'nine'
   if (n === 10) return 'ten'
   return `${n}`
+}
+
+function total(arr: Array<any>): string {
+  let message = ''
+  if (arr.length == 0) {
+    message += 'no tasks yet • '
+  } else {
+    message += `${
+      arr.length
+    } task${
+      arr.length == 1 ? '' : 's'
+    } • `
+  }
+  return message
 }

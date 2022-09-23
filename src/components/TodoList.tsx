@@ -9,10 +9,10 @@ function TodoList() {
 
   const {todosState, todosDispatch} = useContext(TodoContext)
   const [editable, setEditable] = useState(true)
-  const currentUri = window.location.pathname
 
   useEffect(() => {
-    localStorage.setItem('todoApp', JSON.stringify(todosState.todos))
+    console.log('todosState', todosState)
+    localStorage.setItem(`todoApp-${window.location.pathname}`, JSON.stringify(todosState.todos))
   }, [todosState])
 
   const handleDragStart = (e: React.DragEvent<HTMLDivElement>) => {
@@ -35,9 +35,11 @@ function TodoList() {
 
     e.preventDefault()
 
-    if (todosState.todos.length < 2) {
+    if (todosState.todos.length < 1) {
       return
     }
+
+    console.log('dropped')
 
     const targetId = Number(e.currentTarget.id.split('_')[1])
     const sourceId = Number(e.dataTransfer.getData('text').split('_')[1])
@@ -53,8 +55,7 @@ function TodoList() {
   return (
     <div>
       <div>
-        {todosState.todos?.filter(todo => todo.uri == currentUri)
-          .map((item: TodoType, index) =>
+        {todosState.todos?.map((item: TodoType, index) =>
           <div
             key={item.id}
             id={`parent_${index}`}
@@ -70,7 +71,6 @@ function TodoList() {
               <TodoItem
                 todo={{
                   id: item.id,
-                  uri: item.uri,
                   task: item.task,
                   title: item.title,
                   state: item.state,

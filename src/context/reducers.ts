@@ -20,7 +20,6 @@ export enum Types {
 
 export type TodoType = {
   id: string
-  uri: string
   title: string
   task: string
   state: 'todo' | 'doing' | 'finished'
@@ -30,7 +29,6 @@ export type TodoType = {
 type TodoPayload = {
   [Types.Create]: {
     id: string
-    uri: string
     title: string
     task: string
     state: 'todo' | 'doing' | 'finished'
@@ -44,7 +42,6 @@ type TodoPayload = {
   }
   [Types.Update]: {
     id: string
-    uri: string
     title: string
     task: string
     state: 'todo' | 'doing' | 'finished'
@@ -70,7 +67,6 @@ export const todoReducer = (
         ...state,
         {
           id: action.payload.id,
-          uri: action.payload.uri,
           title: action.payload.title,
           task: action.payload.task,
           state: action.payload.state,
@@ -80,7 +76,6 @@ export const todoReducer = (
     case Types.Update:
       const s = [...state]
       const index = s.findIndex(item => item.id === action.payload.id)
-      s[index].uri = action.payload.uri
       s[index].title = action.payload.title
       s[index].task = action.payload.task
       return [...s]
@@ -108,6 +103,7 @@ export const todoReducer = (
     case Types.Delete:
       return [...state.filter(todo => todo.id !== action.payload.id)]
     case Types.Relist:
+      console.log('payload', action.payload)
       return [...action.payload]
     case Types.MovTop:
       const s2 = [...state]
