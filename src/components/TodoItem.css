@@ -23,6 +23,7 @@
     white-space: pre-wrap;
     word-wrap: break-word;       /* Internet Explorer 5.5+ */
     transform: translateY(.09rem);
+    outline: 0;
 }
 
 div {
@@ -61,6 +62,7 @@ div {
     white-space: pre-wrap;
     word-wrap: break-word;       /* Internet Explorer 5.5+ */
     text-align: left;
+    outline: 0;
 }
 
 .buttons {
@@ -104,4 +106,15 @@ div {
 
 .finished {
     text-decoration: line-through;
+}
+
+@media only screen and (min-width: 700px) {
+    body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .TodoItem {
+        width: 40rem;
+    }
 }
