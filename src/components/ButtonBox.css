@@ -1,14 +1,14 @@
 .ButtonBox {
     position: relative;
     display: flex;
-    background-color: #c6a0c5;
+    /*background-color: #c6a0c5;*/
     color: black;
     justify-content: space-around;
     align-items: center;
     border-radius: 1rem;
     font-size: 1.2rem;
-    width: var(--app-width);
-    margin: 2rem 1rem;
+    /*width: var(--app-width);*/
+    margin: 2rem 0;
     padding: .8rem;
 }
 
