@@ -54,11 +54,11 @@ function ButtonBox() {
     <div className={'ButtonBox'}>
       <button
         onClick={newTask}
-      >add task</button>
+      >+</button>
       <button
         onClick={downloadJson}
         disabled={todosState.todos.length == 0}
-      >download</button>
+      >↓</button>
       <UploadButton />
     </div>
   )
