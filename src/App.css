@@ -1,7 +1,7 @@
 #root {
   /*max-width: 1280px;*/
   margin: 0 auto;
-  padding: 2rem;
+  padding: 1rem;
   text-align: center;
 }
 
@@ -13,11 +13,11 @@ li {
   padding: 2em;
 }
 
-.todoInput {
-  display: flex;
-  justify-content: space-around;
-  /*width: 20rem;*/
-}
+/*.todoInput {*/
+/*  display: flex;*/
+/*  justify-content: space-around;*/
+/*  !*width: 20rem;*!*/
+/*}*/
 
 .App {
   width: 100%;
