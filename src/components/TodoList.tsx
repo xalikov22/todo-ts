@@ -1,6 +1,6 @@
 import React, {DragEventHandler, useContext, useEffect, useState} from 'react'
 import {TodoContext} from '../context/TodoContext'
-import {TodoType, Types} from '../context/reducers'
+import {TodoType, Types} from '../context/TodoReducers'
 import TodoItem from './TodoItem'
 import ButtonBox from './ButtonBox'
 import Stats from './Stats'
@@ -9,6 +9,7 @@ function TodoList() {
 
   const {todosState, todosDispatch} = useContext(TodoContext)
   const [editable, setEditable] = useState(true)
+  const [draggable, setDraggable] = useState(true)
 
   useEffect(() => {
     localStorage.setItem(`todoApp-${window.location.pathname}`, JSON.stringify(todosState.todos))
@@ -61,7 +62,7 @@ function TodoList() {
             onDragEnd={() => setEditable(true)}
           >
             <div
-              draggable={todosState.todos.length > 1}
+              draggable={todosState.todos.length > 1 && draggable}
               onDragStart={handleDragStart}
               id={`todo^child_${index}`}
             >
@@ -74,6 +75,7 @@ function TodoList() {
                   color: item.color
                 }}
                 editable={editable}
+                setDraggable={setDraggable}
               />
             </div>
           </div>)}

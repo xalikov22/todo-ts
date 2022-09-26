@@ -3,14 +3,15 @@ import React, {FocusEventHandler, MouseEventHandler,
 import parse from 'html-react-parser'
 import './TodoItem.css'
 import {TodoContext} from '../context/TodoContext'
-import {Types, TodoType} from '../context/reducers'
+import {Types, TodoType} from '../context/TodoReducers'
 
 type TodoItemProps = {
   todo: TodoType
   editable: boolean
+  setDraggable: (dragable: boolean) => void
 }
 
-function TodoItem({todo, editable}: TodoItemProps) {
+function TodoItem({todo, editable, setDraggable}: TodoItemProps) {
 
   const {id, title, task, state, color} = todo
   const {todosDispatch} = useContext(TodoContext)
@@ -55,6 +56,7 @@ function TodoItem({todo, editable}: TodoItemProps) {
       id, title: e.currentTarget.textContent, task, state, color
     }})
     setMarkupTask(replacer(markupTask))
+    setDraggable(true)
   }
 
   const editTask = (): void => {
@@ -70,11 +72,13 @@ function TodoItem({todo, editable}: TodoItemProps) {
     }
     todosDispatch({type: Types.Update, payload: t})
     setMarkupTask(replacer(markupTask))
+    setDraggable(true)
   }
 
   const handleOnFocus:MouseEventHandler<HTMLDivElement> = (e): void => {
     setMarkupTask(task)
     e.currentTarget.focus()
+    setDraggable(false)
   }
 
   const taskRef = useRef<TodoType>()
