@@ -48,7 +48,6 @@ function ButtonBox() {
       link.remove()
     }
     const currentPath = window.location.pathname
-    console.log(currentPath)
     saveTemplateAsFile(
       `todos${currentPath == '/' ? '' : `-${currentPath.slice(1)}`}.json`,
       todosState.todos
