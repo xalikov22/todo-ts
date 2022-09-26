@@ -36,6 +36,7 @@ body {
   min-height: 100vh;
   background-color: #333;
   color: white;
+  padding: 1rem 0;
 }
 
 h1 {
