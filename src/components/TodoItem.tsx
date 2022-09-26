@@ -53,8 +53,9 @@ function TodoItem({todo, editable, setDraggable}: TodoItemProps) {
 
   const editTitle:FocusEventHandler<HTMLDivElement> = (e): void => {
     if (e.currentTarget.textContent == null) return
+    const title = stripHtml(e.currentTarget.textContent)
     todosDispatch({type: Types.Update, payload: {
-      id, title: e.currentTarget.textContent, task, state, color
+      id, title, task, state, color
     }})
     setMarkupTask(replacer(markupTask))
     setDraggable(true)
@@ -188,3 +189,9 @@ function TodoItem({todo, editable, setDraggable}: TodoItemProps) {
 }
 
 export default TodoItem
+
+function stripHtml(s: string): string {
+  let tmp = document.createElement('DIV')
+  tmp.innerHTML = s
+  return tmp.textContent || tmp.innerText || ''
+}
