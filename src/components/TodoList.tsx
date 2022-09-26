@@ -4,7 +4,6 @@ import {TodoType, Types} from '../context/TodoReducers'
 import TodoItem from './TodoItem'
 import ButtonBox from './ButtonBox'
 import Stats from './Stats'
-import styles from './TodoList.module.css'
 
 function TodoList() {
 
@@ -66,7 +65,6 @@ function TodoList() {
               draggable={todosState.todos.length > 1 && draggable}
               onDragStart={handleDragStart}
               id={`todo^child_${index}`}
-              className={styles.Draggable}
             >
               <TodoItem
                 todo={{
