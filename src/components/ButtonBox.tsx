@@ -47,7 +47,12 @@ function ButtonBox() {
       link.dispatchEvent(evt)
       link.remove()
     }
-    saveTemplateAsFile('todos.json', todosState.todos)
+    const currentPath = window.location.pathname
+    console.log(currentPath)
+    saveTemplateAsFile(
+      `todos${currentPath == '/' ? '' : `-${currentPath.slice(1)}`}.json`,
+      todosState.todos
+    )
   }
 
   return (
