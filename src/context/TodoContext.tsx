@@ -1,5 +1,5 @@
 import React, {createContext, useReducer, Dispatch} from 'react'
-import {todoReducer, TodoType, TodoActions} from './reducers'
+import {todoReducer, TodoType, TodoActions} from './TodoReducers'
 
 type InitialStateType = {
   todos: TodoType[]

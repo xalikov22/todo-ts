@@ -2,7 +2,7 @@ import React, {useContext} from 'react'
 import {TodoContext} from '../context/TodoContext'
 import './ButtonBox.css'
 import UploadButton from './UploadButton'
-import {Types} from '../context/reducers'
+import {Types} from '../context/TodoReducers'
 import {uuid} from '../util'
 
 function ButtonBox() {
