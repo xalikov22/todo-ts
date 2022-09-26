@@ -17,6 +17,7 @@ function TodoItem({todo, editable, setDraggable}: TodoItemProps) {
   const {todosDispatch} = useContext(TodoContext)
   const [showDetails, setShowDetails] = useState(false)
   const [markupTask, setMarkupTask] = useState('')
+  const [editing, setEditing] = useState(false)
 
   const onClickDelete = (): void => {
     if (confirm(`Delete todo item "${title}"?`)) {
@@ -57,6 +58,7 @@ function TodoItem({todo, editable, setDraggable}: TodoItemProps) {
     }})
     setMarkupTask(replacer(markupTask))
     setDraggable(true)
+    setEditing(false)
   }
 
   const editTask = (): void => {
@@ -73,12 +75,14 @@ function TodoItem({todo, editable, setDraggable}: TodoItemProps) {
     todosDispatch({type: Types.Update, payload: t})
     setMarkupTask(replacer(markupTask))
     setDraggable(true)
+    setEditing(false)
   }
 
   const handleOnFocus:MouseEventHandler<HTMLDivElement> = (e): void => {
     setMarkupTask(task)
     e.currentTarget.focus()
     setDraggable(false)
+    setEditing(true)
   }
 
   const taskRef = useRef<TodoType>()
@@ -120,7 +124,7 @@ function TodoItem({todo, editable, setDraggable}: TodoItemProps) {
         state === 'doing' && 'italic'
       }`}
         style={{whiteSpace: 'pre-wrap'}}
-      >{title}</div>
+      >{editing ? title : parse(title)}</div>
       {showDetails &&
        <div
          style={{whiteSpace: 'pre-wrap'}}
@@ -148,7 +152,7 @@ function TodoItem({todo, editable, setDraggable}: TodoItemProps) {
            }
          }}
           className={'task'}
-      >{parse(markupTask)}</div>}
+      >{editing ? markupTask : parse(markupTask)}</div>}
       <div className={'buttons'}>
         <button
           className={'btnCircle btnBackgroundColor btnColor'}
