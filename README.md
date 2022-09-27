@@ -8,8 +8,8 @@ npm run dev
 Things that currently work:
 
 - state dispatcher and context
-- local storage
-- editable content
+- realtime local storage
+- editable content in firefox, chrome and safari
 - drag-n-drop
 - download task list
 - upload task list
