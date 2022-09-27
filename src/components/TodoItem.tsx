@@ -9,7 +9,7 @@ import plusIcon from '../assets/plus.svg'
 import playIcon from '../assets/play.svg'
 import stopIcon from '../assets/stop.svg'
 import checkinIcon from '../assets/checkin.svg'
-import totopIcon from '../assets/totop.svg'
+import toTopIcon from '../assets/totop.svg'
 import deleteIcon from '../assets/delete.svg'
 
 type TodoItemProps = {
@@ -195,7 +195,7 @@ function TodoItem({todo, editable, setDraggable}: TodoItemProps) {
           title={`move to top`}
           onClick={onClickMoveToTop}
         >
-          <img style={{width:'.5rem'}} src={totopIcon} alt={'move to top'}/>
+          <img style={{width:'.5rem'}} src={toTopIcon} alt={'move to top'}/>
         </button>
         <button
           className={'btnCircle btnBackgroundColor btnColor'}
