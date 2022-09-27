@@ -22,6 +22,7 @@ function ButtonBox() {
           id: uuid(),
           title: 'New Task',
           task: '- ~~add new task~~\n- do more stuff',
+          showTask: true,
           state: 'todo',
           color: color
         }

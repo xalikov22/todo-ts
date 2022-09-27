@@ -70,6 +70,7 @@ function TodoList() {
                 todo={{
                   id: item.id,
                   task: item.task,
+                  showTask: item.showTask,
                   title: item.title,
                   state: item.state,
                   color: item.color

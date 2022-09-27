@@ -13,9 +13,8 @@ type TodoItemProps = {
 
 function TodoItem({todo, editable, setDraggable}: TodoItemProps) {
 
-  const {id, title, task, state, color} = todo
+  const {id, title, task, showTask, state, color} = todo
   const {todosDispatch} = useContext(TodoContext)
-  const [showDetails, setShowDetails] = useState(false)
   const [markupTask, setMarkupTask] = useState('')
   const [editing, setEditing] = useState(false)
 
@@ -30,7 +29,9 @@ function TodoItem({todo, editable, setDraggable}: TodoItemProps) {
   }
 
   const onClickDetails = (): void => {
-    setShowDetails(show => !show)
+    todosDispatch({type: Types.Update, payload: {
+        id, title, task, showTask: !showTask, state, color
+      }})
   }
 
   const showTaskState = () => {
@@ -45,7 +46,7 @@ function TodoItem({todo, editable, setDraggable}: TodoItemProps) {
   }
 
   const showDetailsText = () => {
-    if (showDetails) {
+    if (showTask) {
       return 'Hide Details'
     }
     return 'Show Details'
@@ -55,7 +56,7 @@ function TodoItem({todo, editable, setDraggable}: TodoItemProps) {
     if (e.currentTarget.textContent == null) return
     const title = stripHtml(e.currentTarget.textContent)
     todosDispatch({type: Types.Update, payload: {
-      id, title, task, state, color
+      id, title, task, showTask, state, color
     }})
     setMarkupTask(replacer(markupTask))
     setDraggable(true)
@@ -70,7 +71,7 @@ function TodoItem({todo, editable, setDraggable}: TodoItemProps) {
       }
     } else {
       t = {
-        id, title, task, state, color
+        id, title, task, showTask, state, color
       }
     }
     todosDispatch({type: Types.Update, payload: t})
@@ -126,7 +127,7 @@ function TodoItem({todo, editable, setDraggable}: TodoItemProps) {
       }`}
         style={{whiteSpace: 'pre-wrap'}}
       >{editing ? title : parse(title)}</div>
-      {showDetails &&
+      {showTask &&
        <div
          style={{whiteSpace: 'pre-wrap'}}
          contentEditable={editable}
@@ -144,12 +145,12 @@ function TodoItem({todo, editable, setDraggable}: TodoItemProps) {
              document.execCommand('insertText', false, '\n')
            }
            taskRef.current = {
-             id, title, task: event.currentTarget.innerText, state, color
+             id, title, task: event.currentTarget.innerText, showTask, state, color
            }
          }}
          onKeyUp={(event) => {
            taskRef.current = {
-             id, title, task: event.currentTarget.innerText, state, color
+             id, title, task: event.currentTarget.innerText, showTask, state, color
            }
          }}
           className={'task'}

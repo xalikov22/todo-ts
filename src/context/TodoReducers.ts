@@ -22,6 +22,7 @@ export type TodoType = {
   id: string
   title: string
   task: string
+  showTask: boolean
   state: 'todo' | 'doing' | 'finished'
   color: { red: number, green: number, blue: number }
 }
@@ -31,6 +32,7 @@ type TodoPayload = {
     id: string
     title: string
     task: string
+    showTask: boolean
     state: 'todo' | 'doing' | 'finished'
     color: { red: number, green: number, blue: number }
   }
@@ -44,6 +46,7 @@ type TodoPayload = {
     id: string
     title: string
     task: string
+    showTask: boolean
     state: 'todo' | 'doing' | 'finished'
     color: { red: number, green: number, blue: number }
   }
@@ -69,6 +72,7 @@ export const todoReducer = (
           id: action.payload.id,
           title: action.payload.title,
           task: action.payload.task,
+          showTask: action.payload.showTask,
           state: action.payload.state,
           color: action.payload.color
         }
@@ -78,6 +82,7 @@ export const todoReducer = (
       const index = s.findIndex(item => item.id === action.payload.id)
       s[index].title = action.payload.title
       s[index].task = action.payload.task
+      s[index].showTask = action.payload.showTask
       return [...s]
     case Types.Finish:
       return [...state.map(todo => {
