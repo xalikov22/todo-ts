@@ -9,6 +9,7 @@ Things that currently work:
 
 - state dispatcher and context
 - local storage
+- editable content
 - drag-n-drop
 - download task list
 - upload task list
