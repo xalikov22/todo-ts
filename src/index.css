@@ -31,8 +31,6 @@ input, input:focus, textarea:focus, select:focus{
 
 body {
   margin: 0;
-  /*display: flex;*/
-  /*place-items: center;*/
   min-height: 100vh;
   background-color: #333;
   color: white;
@@ -49,7 +47,6 @@ button {
   border: 1px solid transparent;
   width: 4rem;
   height: 4rem;
-  /*padding: 0.6em 1.2em;*/
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
@@ -64,19 +61,6 @@ button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
-
-/*@media (prefers-color-scheme: light) {*/
-/*  :root {*/
-/*    color: black;*/
-/*    background-color: #ffffff;*/
-/*  }*/
-/*  a:hover {*/
-/*    color: #747bff;*/
-/*  }*/
-/*  button {*/
-/*    background-color: #f9f9f9;*/
-/*  }*/
-/*}*/
 
 [contenteditable] {
   -webkit-user-select: text;
