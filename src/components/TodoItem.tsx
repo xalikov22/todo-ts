@@ -4,6 +4,13 @@ import parse from 'html-react-parser'
 import './TodoItem.css'
 import {TodoContext} from '../context/TodoContext'
 import {Types, TodoType} from '../context/TodoReducers'
+import minusIcon from '../assets/minus.svg'
+import plusIcon from '../assets/plus.svg'
+import playIcon from '../assets/play.svg'
+import stopIcon from '../assets/stop.svg'
+import checkinIcon from '../assets/checkin.svg'
+import totopIcon from '../assets/totop.svg'
+import deleteIcon from '../assets/delete.svg'
 
 type TodoItemProps = {
   todo: TodoType
@@ -109,6 +116,17 @@ function TodoItem({todo, editable, setDraggable}: TodoItemProps) {
     }
   }
 
+  const taskStateIcon = () => {
+    switch (state) {
+      case 'todo':
+        return playIcon
+      case 'doing':
+        return stopIcon
+      case 'finished':
+        return checkinIcon
+    }
+  }
+
   return (
     <div
       className={'TodoItem'}
@@ -161,28 +179,30 @@ function TodoItem({todo, editable, setDraggable}: TodoItemProps) {
           onClick={onClickDetails}
           title={showDetailsText()}
         >
-          {/*<img src={DeleteIcon} alt={'Delete'} title={'Delete'}/>*/}
+          {showTask ?
+            <img style={{width:'.4rem'}} src={minusIcon} alt={'minus'}/> :
+            <img style={{width:'.5rem'}} src={plusIcon} alt={'plus'}/>}
         </button>
         <button
           className={'btnCircle btnBackgroundColor btnColor'}
           onClick={onClickFinish}
           title={showTaskState()}
         >
-          {/*<img src={DeleteIcon} alt={'Delete'} title={'Delete'}/>*/}
+          <img style={{width:'.5rem'}} src={taskStateIcon()} alt={showTaskState()}/>
         </button>
         <button
           className={'btnCircle btnBackgroundColor btnColor'}
           title={`move to top`}
           onClick={onClickMoveToTop}
         >
-
+          <img style={{width:'.5rem'}} src={totopIcon} alt={'move to top'}/>
         </button>
         <button
           className={'btnCircle btnBackgroundColor btnColor'}
           onClick={onClickDelete}
           title={'Remove Task'}
         >
-          {/*<img src={DeleteIcon} alt={'Delete'} title={'Delete'}/>*/}
+          <img style={{width:'.5rem'}} src={deleteIcon} alt={'Delete'}/>
         </button>
       </div>
     </div>
