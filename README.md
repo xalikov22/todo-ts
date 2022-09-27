@@ -7,7 +7,7 @@ npm i
 npm run dev
 ```
 
-Things that work:
+features:
 
 - state dispatcher and context
 - realtime local storage
