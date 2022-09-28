@@ -68,7 +68,7 @@ div {
 .buttons {
     position: absolute;
     right: .8rem;
-    top: .7rem;
+    top: .85rem;
 }
 
 .TodoItem .buttons {
