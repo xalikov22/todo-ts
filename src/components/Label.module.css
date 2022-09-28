@@ -1,23 +1,24 @@
 .Label {
     display: inline-flex;
-    padding: 0.25em 0.5em;
-    border-radius: 0.25em;
+    padding: 0.17em 0.17em;
+    border-radius: 0.2em;
     white-space: nowrap;
     height: .4rem;
     user-select: none;
     justify-content: center;
     align-items: center;
-    color: white;
-    transform: translateY(.35rem) translateX(-1rem);
+    transform: translateY(.37rem) translateX(-.1rem);
 }
 
 .TextBox {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 0.50em;
+    font-size: 0.4em;
     font-weight: 700;
     transform: translateY(1px);
+    color: white;
+    opacity: .9;
 }
 
 .red {
@@ -30,10 +31,4 @@
 
 .blue {
     background-color: blue;
-}
-
-@media only screen and (max-width: 700px) {
-    .Label {
-        transform: translateY(2.6rem) translateX(8.35rem);
-    }
 }

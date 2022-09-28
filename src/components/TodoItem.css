@@ -5,18 +5,18 @@
     color: black;
     justify-content: flex-start;
     flex-direction: column;
-    border-radius: 1rem;
+    border-radius: .5rem;
     font-size: 1.2rem;
-    /*width: 30rem;*/
     margin-bottom: 1rem;
     padding: .8rem;
+    min-width: var(--min-width);
 }
 
 .TodoItem .title {
     line-height: 1.7rem;
     font-weight: bolder;
     align-self: start;
-    padding: 0 1rem;
+    padding: 0 .2rem;
     font-size: 110%;
     text-decoration-thickness: 4px;
     opacity: 80%;
@@ -58,7 +58,7 @@ div {
 
 .TodoItem .task {
     align-self: start;
-    padding: 1rem;
+    padding: .8rem .5rem .1rem .5rem;
     white-space: pre-wrap;
     word-wrap: break-word;       /* Internet Explorer 5.5+ */
     text-align: left;
@@ -97,11 +97,6 @@ div {
 
 .TodoItem .btnColor{
     color: black;
-}
-
-.TodoItem img {
-    /*width: .6rem;*/
-    /*height: .6rem;*/
 }
 
 .finished {

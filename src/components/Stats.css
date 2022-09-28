@@ -1,3 +1,4 @@
 .Stats {
+    min-width: var(--min-width);
     font-size: 130%;
 }

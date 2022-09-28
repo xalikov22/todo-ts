@@ -22,9 +22,10 @@ type TodoItemProps = {
 function TodoItem({todo, editable, setDraggable}: TodoItemProps) {
 
   const {id, title, task, showTask, state, color} = todo
-  const {todosDispatch} = useContext(TodoContext)
+  const {todosState, todosDispatch} = useContext(TodoContext)
   const [markupTask, setMarkupTask] = useState('')
   const [editing, setEditing] = useState(false)
+  const isFirst = todosState.todos[0]?.id === id
 
   const onClickDelete = (): void => {
     if (confirm(`Delete todo item "${title}"?`)) {
@@ -175,7 +176,7 @@ function TodoItem({todo, editable, setDraggable}: TodoItemProps) {
           className={'task'}
       >{editing ? markupTask : parse(markupTask)}</div>}
       <div className={'buttons'}>
-        {showTask && state == 'doing' && <Label text='DOING' color='green' />}
+        {state == 'doing' && <Label text='DOING' color='green' />}
         <button
           className={'btnCircle btnBackgroundColor btnColor'}
           onClick={onClickDetails}
@@ -192,13 +193,13 @@ function TodoItem({todo, editable, setDraggable}: TodoItemProps) {
         >
           <img style={{width:'.5rem'}} src={taskStateIcon()} alt={showTaskState()}/>
         </button>
-        <button
+        {!isFirst && <button
           className={'btnCircle btnBackgroundColor btnColor'}
           title={`move to top`}
           onClick={onClickMoveToTop}
         >
           <img style={{width:'.5rem'}} src={toTopIcon} alt={'move to top'}/>
-        </button>
+        </button>}
         <button
           className={'btnCircle btnBackgroundColor btnColor'}
           onClick={onClickDelete}

@@ -7,9 +7,9 @@
     align-items: center;
     border-radius: 1rem;
     font-size: 1.2rem;
-    /*width: var(--app-width);*/
     margin: 2rem 0;
     padding: .8rem;
+    min-width: var(--min-width);
 }
 
 .ButtonBox .FileInput {
