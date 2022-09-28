@@ -175,7 +175,7 @@ function TodoItem({todo, editable, setDraggable}: TodoItemProps) {
           className={'task'}
       >{editing ? markupTask : parse(markupTask)}</div>}
       <div className={'buttons'}>
-        {state == 'doing' && <Label text='DOING' color='green' />}
+        {showTask && state == 'doing' && <Label text='DOING' color='green' />}
         <button
           className={'btnCircle btnBackgroundColor btnColor'}
           onClick={onClickDetails}
