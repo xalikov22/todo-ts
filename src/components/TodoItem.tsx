@@ -89,11 +89,20 @@ function TodoItem({todo, editable, setDraggable}: TodoItemProps) {
     setEditing(false)
   }
 
-  const handleOnFocus:MouseEventHandler<HTMLDivElement> = (e): void => {
+  const handleClickAndFocus = (): void => {
     setMarkupTask(task)
-    e.currentTarget.focus()
     setDraggable(false)
     setEditing(true)
+  }
+
+  const handleOnClick:MouseEventHandler<HTMLDivElement> = (e): void => {
+    handleClickAndFocus()
+    e.currentTarget.focus()
+  }
+
+  const handleOnFocus:FocusEventHandler<HTMLDivElement> = (e): void => {
+    handleClickAndFocus()
+    e.currentTarget.focus()
   }
 
   const taskRef = useRef<TodoType>()
@@ -138,7 +147,8 @@ function TodoItem({todo, editable, setDraggable}: TodoItemProps) {
         contentEditable={editable}
         suppressContentEditableWarning={true}
         onBlur={editTitle}
-        onClick={handleOnFocus}
+        onClick={handleOnClick}
+        onFocus={handleOnFocus}
         spellCheck={false}
         className={`title ${
         state === 'finished' && 'strikeout toBackground'
@@ -146,6 +156,11 @@ function TodoItem({todo, editable, setDraggable}: TodoItemProps) {
         state === 'doing' && 'italic'
       }`}
         style={{whiteSpace: 'pre-wrap'}}
+        onKeyDown={(event) => {
+          if (event.key === 'Tab') {
+            event.preventDefault()
+          }
+        }}
       >{editing ? title : parse(title)}</div>
       {showTask &&
        <div
@@ -153,7 +168,8 @@ function TodoItem({todo, editable, setDraggable}: TodoItemProps) {
          contentEditable={editable}
          suppressContentEditableWarning={true}
          onBlur={editTask}
-         onClick={handleOnFocus}
+         onClick={handleOnClick}
+         onFocus={handleOnFocus}
          spellCheck={false}
          onKeyDown={(event) => {
            if (event.key === 'Tab') {
