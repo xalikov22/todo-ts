@@ -27,6 +27,7 @@ function TodoItem({todo, editable, setDraggable}: TodoItemProps) {
   const [markupTask, setMarkupTask] = useState('')
   const [openTask, setOpenTask] = useState(false)
   const [editing, setEditing] = useState(false)
+  const titleRef = useRef<HTMLInputElement>(null)
   const detailsRef = useRef<HTMLDivElement>(null)
   const detailsHeight = useRef(0)
 
@@ -43,9 +44,9 @@ function TodoItem({todo, editable, setDraggable}: TodoItemProps) {
   }
 
   const onClickDetails = (): void => {
-    // todosDispatch({type: Types.Update, payload: {
-    //     id, title, task, showTask: !showTask, state, color
-    //   }})
+    todosDispatch({type: Types.Update, payload: {
+        id, title, task, showTask: !showTask, state, color
+      }})
     setOpenTask(!openTask)
   }
 
@@ -79,10 +80,8 @@ function TodoItem({todo, editable, setDraggable}: TodoItemProps) {
   }
 
   const editTask:FocusEventHandler<HTMLDivElement> = (e): void => {
-    // if (!detailsRef.current) return
-    // if (e.currentTarget.scrollHeight == 0) return
+    if (!detailsRef.current) return
     detailsHeight.current = e.currentTarget.scrollHeight
-    // @ts-ignore
     detailsRef.current.style.height = `${detailsHeight.current}px`
     let t:TodoType
     if (taskRef.current != null) {
@@ -152,16 +151,15 @@ function TodoItem({todo, editable, setDraggable}: TodoItemProps) {
   }
 
   useEffect(() => {
+    console.log('TodoItem Loaded')
     setTimeout(() => {
-      // if (detailsRef.current) {
-      //   detailsRef.current.style.height = `${detailsHeight.current}px`
-      // }
-      // @ts-ignore
+      if (!detailsRef.current) return
       detailsHeight.current = detailsRef.current.scrollHeight
+      if (showTask) {
+        setOpenTask(true)
+      }
     }, 500)
   }, [])
-
-  console.log('height', detailsRef.current, detailsHeight.current)
 
   return (
     <div
@@ -169,6 +167,7 @@ function TodoItem({todo, editable, setDraggable}: TodoItemProps) {
       style={{backgroundColor: `rgb(${color.red},${color.green},${color.blue}`}}
     >
       <div
+        ref={titleRef}
         contentEditable={editable}
         suppressContentEditableWarning={true}
         onBlur={editTitle}
@@ -180,7 +179,9 @@ function TodoItem({todo, editable, setDraggable}: TodoItemProps) {
       } ${
         state === 'doing' && 'italic'
       }`}
-        style={{whiteSpace: 'pre-wrap'}}
+        style={{
+          marginBottom: openTask ? '.6rem' : '0',
+        }}
         onKeyDown={(event) => {
           if (event.key === 'Tab') {
             event.preventDefault()

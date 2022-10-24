@@ -25,6 +25,7 @@
     transform: translateY(.09rem);
     outline: 0;
     margin-bottom: .6rem;
+    transition: margin-bottom .3s;
 }
 
 div {
