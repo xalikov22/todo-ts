@@ -24,6 +24,7 @@
     word-wrap: break-word;       /* Internet Explorer 5.5+ */
     transform: translateY(.09rem);
     outline: 0;
+    margin-bottom: .6rem;
 }
 
 div {
@@ -58,11 +59,15 @@ div {
 
 .TodoItem .task {
     align-self: start;
-    padding: .8rem .5rem .1rem .5rem;
+    padding: 0 .6rem;
     white-space: pre-wrap;
     word-wrap: break-word;       /* Internet Explorer 5.5+ */
     text-align: left;
-    outline: 0;
+    transition: height .4s;
+    overflow: hidden;
+    display: inline-block;
+    outline: none;
+    height: auto
 }
 
 .buttons {
@@ -91,7 +96,7 @@ div {
     opacity: 50%;
 }
 
-.TodoItem .btnBackgroundColor{
+.TodoItem .btnBackgroundColor {
     background: white;
 }
 
@@ -118,4 +123,17 @@ div {
     .TodoItem {
         border-radius: 0;
     }
+}
+
+.toggle {
+    font-weight: bold;
+    cursor: pointer;
+    margin-bottom: 1rem;
+    border-bottom: 1px dashed seagreen;
+    color: black;
+    transition: color .15s ease-in;
+}
+
+.toggle:hover {
+    color: #747bff;
 }

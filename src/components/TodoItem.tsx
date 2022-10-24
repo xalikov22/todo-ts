@@ -22,9 +22,14 @@ type TodoItemProps = {
 function TodoItem({todo, editable, setDraggable}: TodoItemProps) {
 
   const {id, title, task, showTask, state, color} = todo
+
   const {todosState, todosDispatch} = useContext(TodoContext)
   const [markupTask, setMarkupTask] = useState('')
+  const [openTask, setOpenTask] = useState(false)
   const [editing, setEditing] = useState(false)
+  const detailsRef = useRef<HTMLDivElement>(null)
+  const detailsHeight = useRef(0)
+
   const isFirst = todosState.todos[0]?.id === id
 
   const onClickDelete = (): void => {
@@ -38,9 +43,10 @@ function TodoItem({todo, editable, setDraggable}: TodoItemProps) {
   }
 
   const onClickDetails = (): void => {
-    todosDispatch({type: Types.Update, payload: {
-        id, title, task, showTask: !showTask, state, color
-      }})
+    // todosDispatch({type: Types.Update, payload: {
+    //     id, title, task, showTask: !showTask, state, color
+    //   }})
+    setOpenTask(!openTask)
   }
 
   const showTaskState = () => {
@@ -55,7 +61,7 @@ function TodoItem({todo, editable, setDraggable}: TodoItemProps) {
   }
 
   const showDetailsText = () => {
-    if (showTask) {
+    if (openTask) {
       return 'Hide Details'
     }
     return 'Show Details'
@@ -72,7 +78,12 @@ function TodoItem({todo, editable, setDraggable}: TodoItemProps) {
     setEditing(false)
   }
 
-  const editTask = (): void => {
+  const editTask:FocusEventHandler<HTMLDivElement> = (e): void => {
+    // if (!detailsRef.current) return
+    // if (e.currentTarget.scrollHeight == 0) return
+    detailsHeight.current = e.currentTarget.scrollHeight
+    // @ts-ignore
+    detailsRef.current.style.height = `${detailsHeight.current}px`
     let t:TodoType
     if (taskRef.current != null) {
       t = {
@@ -101,6 +112,8 @@ function TodoItem({todo, editable, setDraggable}: TodoItemProps) {
   }
 
   const handleOnFocus:FocusEventHandler<HTMLDivElement> = (e): void => {
+    if (!detailsRef.current) return
+    detailsRef.current.style.height = `auto`
     handleClickAndFocus()
     e.currentTarget.focus()
   }
@@ -138,6 +151,18 @@ function TodoItem({todo, editable, setDraggable}: TodoItemProps) {
     }
   }
 
+  useEffect(() => {
+    setTimeout(() => {
+      // if (detailsRef.current) {
+      //   detailsRef.current.style.height = `${detailsHeight.current}px`
+      // }
+      // @ts-ignore
+      detailsHeight.current = detailsRef.current.scrollHeight
+    }, 500)
+  }, [])
+
+  console.log('height', detailsRef.current, detailsHeight.current)
+
   return (
     <div
       className={'TodoItem'}
@@ -162,43 +187,47 @@ function TodoItem({todo, editable, setDraggable}: TodoItemProps) {
           }
         }}
       >{editing ? title : parse(title)}</div>
-      {showTask &&
-       <div
-         style={{whiteSpace: 'pre-wrap'}}
-         contentEditable={editable}
-         suppressContentEditableWarning={true}
-         onBlur={editTask}
-         onClick={handleOnClick}
-         onFocus={handleOnFocus}
-         spellCheck={false}
-         onKeyDown={(event) => {
-           if (event.key === 'Tab') {
-             event.preventDefault()
-             document.execCommand('insertText', false, '\t')
-           }
-           if (event.key === 'Enter') {
-             event.preventDefault()
-             document.execCommand('insertText', false, '\n')
-           }
-           taskRef.current = {
-             id, title, task: event.currentTarget.innerText, showTask, state, color
-           }
-         }}
-         onKeyUp={(event) => {
-           taskRef.current = {
-             id, title, task: event.currentTarget.innerText, showTask, state, color
-           }
-         }}
-          className={'task'}
-      >{editing ? markupTask : parse(markupTask)}</div>}
+      <div
+        ref={detailsRef}
+        style={{
+          height:`${openTask ? `${detailsHeight.current}px` : '0'}`
+        }}
+        contentEditable={editable}
+        suppressContentEditableWarning={true}
+        onBlur={editTask}
+        onClick={handleOnClick}
+        onFocus={handleOnFocus}
+        spellCheck={false}
+        onKeyDown={(event) => {
+          if (event.key === 'Tab') {
+            event.preventDefault()
+            document.execCommand('insertText', false, '\t')
+          }
+          if (event.key === 'Enter') {
+            event.preventDefault()
+            document.execCommand('insertText', false, '\n')
+          }
+          taskRef.current = {
+            id, title, task: event.currentTarget.innerText, showTask, state, color
+          }
+        }}
+        onKeyUp={(event) => {
+          taskRef.current = {
+            id, title, task: event.currentTarget.innerText, showTask, state, color
+          }
+        }}
+        className={'task'}
+      >
+        {editing ? markupTask : parse(markupTask)}
+      </div>
       <div className={'buttons'}>
         {state == 'doing' && <Label text='DOING' color='green' />}
         <button
-          className={'btnCircle btnBackgroundColor btnColor'}
+          className={'btnCircle btnBackgroundColor btnColor toggle'}
           onClick={onClickDetails}
           title={showDetailsText()}
         >
-          {showTask ?
+          {openTask ?
             <img style={{width:'.4rem'}} src={minusIcon} alt={'minus'}/> :
             <img style={{width:'.5rem'}} src={plusIcon} alt={'plus'}/>}
         </button>
