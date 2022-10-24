@@ -13,6 +13,7 @@ features:
 - realtime local storage
 - editable content in firefox, chrome and safari
 - drag-n-drop
+- animated open and close toggle for details
 - download task list
 - upload task list
 - markup: bullets, strike through, html
