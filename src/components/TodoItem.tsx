@@ -80,9 +80,10 @@ function TodoItem({todo, editable, setDraggable}: TodoItemProps) {
   }
 
   const editTask:FocusEventHandler<HTMLDivElement> = (e): void => {
-    if (!detailsRef.current) return
-    detailsHeight.current = e.currentTarget.scrollHeight
-    detailsRef.current.style.height = `${detailsHeight.current}px`
+    if (detailsRef.current) {
+      detailsHeight.current = e.currentTarget.scrollHeight
+      detailsRef.current.style.height = `${detailsHeight.current}px`
+    }
     let t:TodoType
     if (taskRef.current != null) {
       t = {
@@ -171,8 +172,6 @@ function TodoItem({todo, editable, setDraggable}: TodoItemProps) {
         contentEditable={editable}
         suppressContentEditableWarning={true}
         onBlur={editTitle}
-        onClick={handleOnClick}
-        onFocus={handleOnFocus}
         spellCheck={false}
         className={`title ${
         state === 'finished' && 'strikeout toBackground'
