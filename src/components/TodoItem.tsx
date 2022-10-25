@@ -226,7 +226,7 @@ function TodoItem({todo, editable, setDraggable}: TodoItemProps) {
       </div>
       <div className={'buttons'}>
         {state == 'doing' && <Label text='DOING' color='green' />}
-        <button
+        {!editing && <button
           className={'btnCircle btnBackgroundColor btnColor toggle'}
           onClick={onClickDetails}
           title={showDetailsText()}
@@ -234,7 +234,7 @@ function TodoItem({todo, editable, setDraggable}: TodoItemProps) {
           {openTask ?
             <img style={{width:'.4rem'}} src={minusIcon} alt={'minus'}/> :
             <img style={{width:'.5rem'}} src={plusIcon} alt={'plus'}/>}
-        </button>
+        </button>}
         <button
           className={'btnCircle btnBackgroundColor btnColor'}
           onClick={onClickFinish}
