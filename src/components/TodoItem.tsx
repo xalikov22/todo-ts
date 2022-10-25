@@ -44,10 +44,12 @@ function TodoItem({todo, editable, setDraggable}: TodoItemProps) {
   }
 
   const onClickDetails = (): void => {
-    todosDispatch({type: Types.Update, payload: {
-        id, title, task, showTask: !showTask, state, color
-      }})
-    setOpenTask(!openTask)
+    if (!editing) {
+      todosDispatch({type: Types.Update, payload: {
+          id, title, task, showTask: !showTask, state, color
+        }})
+      setOpenTask(!openTask)
+    }
   }
 
   const showTaskState = () => {
