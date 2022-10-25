@@ -79,11 +79,7 @@ function TodoItem({todo, editable, setDraggable}: TodoItemProps) {
     setEditing(false)
   }
 
-  const editTask:FocusEventHandler<HTMLDivElement> = (e): void => {
-    if (detailsRef.current) {
-      detailsHeight.current = e.currentTarget.scrollHeight
-      detailsRef.current.style.height = `${detailsHeight.current}px`
-    }
+  const editTask = (): void => {
     let t:TodoType
     if (taskRef.current != null) {
       t = {
@@ -98,6 +94,12 @@ function TodoItem({todo, editable, setDraggable}: TodoItemProps) {
     setMarkupTask(replacer(markupTask))
     setDraggable(true)
     setEditing(false)
+    setTimeout(() => {
+      if (detailsRef.current) {
+        detailsHeight.current = detailsRef.current.scrollHeight
+        detailsRef.current.style.height = `${detailsHeight.current}px`
+      }
+    }, 500)
   }
 
   const handleClickAndFocus = (): void => {
