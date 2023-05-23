@@ -1,5 +1,7 @@
-import React, {FocusEventHandler, MouseEventHandler,
-  useContext, useEffect, useRef, useState} from 'react'
+import React, {
+  FocusEventHandler, MouseEventHandler,
+  useContext, useEffect, useRef, useState
+} from 'react'
 import parse from 'html-react-parser'
 import './TodoItem.css'
 import {TodoContext} from '../context/TodoContext'
@@ -45,9 +47,11 @@ function TodoItem({todo, editable, setDraggable}: TodoItemProps) {
 
   const onClickDetails = (): void => {
     if (!editing) {
-      todosDispatch({type: Types.Update, payload: {
+      todosDispatch({
+        type: Types.Update, payload: {
           id, title, task, showTask: !showTask, state, color
-        }})
+        }
+      })
       setOpenTask(!openTask)
     }
   }
@@ -70,19 +74,21 @@ function TodoItem({todo, editable, setDraggable}: TodoItemProps) {
     return 'Show Details'
   }
 
-  const editTitle:FocusEventHandler<HTMLDivElement> = (e): void => {
+  const editTitle: FocusEventHandler<HTMLDivElement> = (e): void => {
     if (e.currentTarget.textContent == null) return
     const title = stripHtml(e.currentTarget.textContent)
-    todosDispatch({type: Types.Update, payload: {
-      id, title, task, showTask, state, color
-    }})
+    todosDispatch({
+      type: Types.Update, payload: {
+        id, title, task, showTask, state, color
+      }
+    })
     setMarkupTask(replacer(markupTask))
     setDraggable(true)
     setEditing(false)
   }
 
   const editTask = (): void => {
-    let t:TodoType
+    let t: TodoType
     if (taskRef.current != null) {
       t = {
         ...taskRef.current
@@ -110,12 +116,12 @@ function TodoItem({todo, editable, setDraggable}: TodoItemProps) {
     setEditing(true)
   }
 
-  const handleOnClick:MouseEventHandler<HTMLDivElement> = (e): void => {
+  const handleOnClick: MouseEventHandler<HTMLDivElement> = (e): void => {
     handleClickAndFocus()
     e.currentTarget.focus()
   }
 
-  const handleOnFocus:FocusEventHandler<HTMLDivElement> = (e): void => {
+  const handleOnFocus: FocusEventHandler<HTMLDivElement> = (e): void => {
     if (!detailsRef.current) return
     detailsRef.current.style.height = `auto`
     handleClickAndFocus()
@@ -127,7 +133,7 @@ function TodoItem({todo, editable, setDraggable}: TodoItemProps) {
   function replacer(s: string): string {
     const re = new RegExp(/~~.+~~/gi)
     return s.replace(re, (match) => {
-      return `✓<span class="finished">${match.slice(2, -2)}</span>`
+      return `✅ <span class="finished">${match.slice(2, -2)}</span>`
     })
       .replace(/\n- /g, '\n• ')
       .replace(/^- /, '• ')
@@ -137,7 +143,7 @@ function TodoItem({todo, editable, setDraggable}: TodoItemProps) {
     setMarkupTask(replacer(task))
   }, [task])
 
-  const onClickMoveToTop:MouseEventHandler<HTMLButtonElement> = (e): void => {
+  const onClickMoveToTop: MouseEventHandler<HTMLButtonElement> = (e): void => {
     if (confirm(`Move task "${title}" to top?`)) {
       const listId = e.currentTarget.parentElement?.parentElement?.parentElement?.id
       todosDispatch({type: Types.MovTop, payload: {id: Number(listId?.split('_')[1])}})
@@ -171,30 +177,34 @@ function TodoItem({todo, editable, setDraggable}: TodoItemProps) {
       className={'TodoItem'}
       style={{backgroundColor: `rgb(${color.red},${color.green},${color.blue}`}}
     >
-      <div
-        ref={titleRef}
-        contentEditable={editable}
-        suppressContentEditableWarning={true}
-        onBlur={editTitle}
-        spellCheck={false}
-        className={`title ${
-        state === 'finished' && 'strikeout toBackground'
-      } ${
-        state === 'doing' && 'italic'
-      }`}
-        style={{
-          marginBottom: openTask ? '.6rem' : '0',
-        }}
-        onKeyDown={(event) => {
-          if (event.key === 'Tab') {
-            event.preventDefault()
-          }
-        }}
-      >{editing ? title : parse(title)}</div>
+      <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'start', alignItems: 'start'}}>
+        {state === 'finished' && <div style={{transform: 'translateY(.3em)'}}>✅ </div>}
+        <div
+          ref={titleRef}
+          contentEditable={editable}
+          suppressContentEditableWarning={true}
+          onBlur={editTitle}
+          spellCheck={false}
+          className={`title ${
+            state === 'finished' && 'strikeout toBackground'
+          } ${
+            state === 'doing' && 'italic'
+          }`}
+          style={{
+            marginBottom: openTask ? '.6rem' : '0',
+          }}
+          onKeyDown={(event) => {
+            if (event.key === 'Tab') {
+              event.preventDefault()
+            }
+          }}
+        >{editing ? title : parse(title)}</div>
+      </div>
       <div
         ref={detailsRef}
         style={{
-          height:`${openTask ? `${detailsHeight.current}px` : '0'}`
+          height: `${openTask ? `${detailsHeight.current}px` : '0'}`,
+          marginTop: openTask ? '.5rem' : '0',
         }}
         contentEditable={editable}
         suppressContentEditableWarning={true}
@@ -225,36 +235,36 @@ function TodoItem({todo, editable, setDraggable}: TodoItemProps) {
         {editing ? markupTask : parse(markupTask)}
       </div>
       <div className={'buttons'}>
-        {state == 'doing' && <Label text='DOING' color='green' />}
+        {state == 'doing' && <Label text="DOING" color="green"/>}
         {!editing && <button
           className={'btnCircle btnBackgroundColor btnColor toggle'}
           onClick={onClickDetails}
           title={showDetailsText()}
         >
           {openTask ?
-            <img style={{width:'.4rem'}} src={minusIcon} alt={'minus'}/> :
-            <img style={{width:'.5rem'}} src={plusIcon} alt={'plus'}/>}
+            <img style={{width: '.4rem'}} src={minusIcon} alt={'minus'}/> :
+            <img style={{width: '.5rem'}} src={plusIcon} alt={'plus'}/>}
         </button>}
         <button
           className={'btnCircle btnBackgroundColor btnColor'}
           onClick={onClickFinish}
           title={showTaskState()}
         >
-          <img style={{width:'.5rem'}} src={taskStateIcon()} alt={showTaskState()}/>
+          <img style={{width: '.5rem'}} src={taskStateIcon()} alt={showTaskState()}/>
         </button>
         {!isFirst && <button
           className={'btnCircle btnBackgroundColor btnColor'}
           title={`move to top`}
           onClick={onClickMoveToTop}
         >
-          <img style={{width:'.5rem'}} src={toTopIcon} alt={'move to top'}/>
+          <img style={{width: '.5rem'}} src={toTopIcon} alt={'move to top'}/>
         </button>}
         <button
           className={'btnCircle btnBackgroundColor btnColor'}
           onClick={onClickDelete}
           title={'Remove Task'}
         >
-          <img style={{width:'.5rem'}} src={deleteIcon} alt={'Delete'}/>
+          <img style={{width: '.5rem'}} src={deleteIcon} alt={'Delete'}/>
         </button>
       </div>
     </div>

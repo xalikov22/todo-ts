@@ -22,7 +22,7 @@
     opacity: 80%;
     white-space: pre-wrap;
     word-wrap: break-word;       /* Internet Explorer 5.5+ */
-    transform: translateY(.09rem);
+    transform: translateY(.2rem);
     outline: 0;
     margin-bottom: .6rem;
     transition: margin-bottom .3s;
@@ -58,11 +58,11 @@ div {
 
 .TodoItem .task {
     align-self: start;
-    padding: 0 .6rem;
+    padding: 0 .8rem;
     white-space: pre-wrap;
     word-wrap: break-word;       /* Internet Explorer 5.5+ */
     text-align: left;
-    transition: height .4s;
+    transition: height .4s, transform .5s;
     overflow: hidden;
     display: inline-block;
     outline: none;
