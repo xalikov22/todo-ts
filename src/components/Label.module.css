@@ -1,34 +1,34 @@
 .Label {
-    display: inline-flex;
-    padding: 0.17em 0.17em;
-    border-radius: 0.2em;
-    white-space: nowrap;
-    height: .4rem;
-    user-select: none;
-    justify-content: center;
-    align-items: center;
-    transform: translateY(.37rem) translateX(-.1rem);
+  display: inline-flex;
+  padding: 0.17em 0.17em;
+  border-radius: 0.2em;
+  white-space: nowrap;
+  height: 0.4rem;
+  user-select: none;
+  justify-content: center;
+  align-items: center;
+  transform: translateY(0.37rem) translateX(-0.1rem);
 }
 
 .TextBox {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 0.4em;
-    font-weight: 700;
-    transform: translateY(1px);
-    color: white;
-    opacity: .9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.4em;
+  font-weight: 700;
+  transform: translateY(1px);
+  color: white;
+  opacity: 0.9;
 }
 
 .red {
-    background-color: red;
+  background-color: red;
 }
 
 .green {
-    background-color: green;
+  background-color: green;
 }
 
 .blue {
-    background-color: blue;
+  background-color: blue;
 }

@@ -1,4 +1,9 @@
 .Stats {
-    min-width: var(--min-width);
-    font-size: 130%;
+  min-width: var(--min-width);
+  font-size: 130%;
+  width: 670px;
+  height: 100px;
+  font-size: 30px;
+  font-weight: 500;
+  color: lime;
 }

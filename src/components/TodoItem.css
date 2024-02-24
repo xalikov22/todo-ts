@@ -1,139 +1,139 @@
 .TodoItem {
-    position: relative;
-    display: flex;
-    background-color: lightskyblue;
-    color: black;
-    justify-content: flex-start;
-    flex-direction: column;
-    border-radius: .5rem;
-    font-size: 1.2rem;
-    margin-bottom: 1rem;
-    padding: .8rem;
-    min-width: var(--min-width);
+  position: relative;
+  display: flex;
+  background-color: lightskyblue;
+  color: black;
+  justify-content: flex-start;
+  flex-direction: column;
+  border-radius: 0.5rem;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  padding: 0.8rem;
+  min-width: var(--min-width);
 }
 
 .TodoItem .title {
-    line-height: 1.7rem;
-    font-weight: bolder;
-    align-self: start;
-    padding: 0 .2rem;
-    font-size: 110%;
-    text-decoration-thickness: 4px;
-    opacity: 80%;
-    white-space: pre-wrap;
-    word-wrap: break-word;       /* Internet Explorer 5.5+ */
-    transform: translateY(.2rem);
-    outline: 0;
-    margin-bottom: .6rem;
-    transition: margin-bottom .3s;
+  line-height: 1.7rem;
+  font-weight: bolder;
+  align-self: start;
+  padding: 0 0.2rem;
+  font-size: 110%;
+  text-decoration-thickness: 4px;
+  opacity: 80%;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  transform: translateY(0.2rem);
+  outline: 0;
+  margin-bottom: 0.6rem;
+  transition: margin-bottom 0.3s;
 }
 
 div {
-    white-space: pre-wrap;
-    word-wrap: break-word;       /* Internet Explorer 5.5+ */
+  white-space: pre-wrap;
+  word-wrap: break-word;
 }
 
 .italic {
-    font-style: italic;
+  font-style: italic;
 }
 
 .toBackground {
-    opacity: 50%!important;
+  opacity: 50% !important;
 }
 
 .strikeout {
-    line-height: 2rem;
-    position: relative;
+  line-height: 2rem;
+  position: relative;
 }
 
 .strikeout::after {
-    border-bottom: 0.2em solid black;
-    content: "";
-    left: 0;
-    margin-top: calc(0.3em / 2 * -1);
-    position: absolute;
-    right: 0;
-    top: 50%;
+  border-bottom: 0.2em solid black;
+  content: "";
+  left: 0;
+  margin-top: calc(0.3em / 2 * -1);
+  position: absolute;
+  right: 0;
+  top: 50%;
 }
 
 .TodoItem .task {
-    align-self: start;
-    padding: 0 .8rem;
-    white-space: pre-wrap;
-    word-wrap: break-word;       /* Internet Explorer 5.5+ */
-    text-align: left;
-    transition: height .4s, transform .5s;
-    overflow: hidden;
-    display: inline-block;
-    outline: none;
-    height: auto
+  align-self: start;
+  padding: 0 0.8rem;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  text-align: left;
+  transition: height 0.4s, transform 0.5s;
+  overflow: hidden;
+  display: inline-block;
+  outline: none;
+  height: auto;
 }
 
 .buttons {
-    position: absolute;
-    right: .8rem;
-    top: .85rem;
+  position: absolute;
+  right: 0.8rem;
+  top: 0.85rem;
 }
 
 .TodoItem .buttons {
-    align-self: end;
-    display: flex;
-    flex-direction: row;
-    gap: .5rem;
+  align-self: end;
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
 }
 
 .TodoItem .btnCircle {
-    border-radius: 50% ;
-    padding: .8rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: .7rem;
-    height: .7rem;
-    outline: none;
-    border: none;
-    opacity: 50%;
+  border-radius: 50%;
+  padding: 0.8rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 0.7rem;
+  height: 0.7rem;
+  outline: none;
+  border: none;
+  opacity: 50%;
 }
 
 .TodoItem .btnBackgroundColor {
-    background: white;
+  background: white;
 }
 
-.TodoItem .btnColor{
-    color: black;
+.TodoItem .btnColor {
+  color: black;
 }
 
 .finished {
-    text-decoration: line-through;
-    opacity: .6;
+  text-decoration: line-through;
+  opacity: 0.6;
 }
 
 @media only screen and (min-width: 700px) {
-    body {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    .TodoItem {
-        width: 40rem;
-    }
+  body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .TodoItem {
+    width: 40rem;
+  }
 }
 
 @media only screen and (max-width: 700px) {
-    .TodoItem {
-        border-radius: 0;
-    }
+  .TodoItem {
+    border-radius: 0;
+  }
 }
 
 .toggle {
-    font-weight: bold;
-    cursor: pointer;
-    margin-bottom: 1rem;
-    border-bottom: 1px dashed seagreen;
-    color: black;
-    transition: color .15s ease-in;
+  font-weight: bold;
+  cursor: pointer;
+  margin-bottom: 1rem;
+  border-bottom: 1px dashed seagreen;
+  color: black;
+  transition: color 0.15s ease-in;
 }
 
 .toggle:hover {
-    color: #747bff;
+  color: #747bff;
 }
